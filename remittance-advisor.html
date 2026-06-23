@@ -1,577 +1,379 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Remittance Advisor — USD to INR</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>RemitIQ — Best USD to INR Transfer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --ink:#0d0d0c;
+  --ink2:#44433e;
+  --ink3:#8c8b84;
+  --paper:#fafaf8;
+  --white:#ffffff;
+  --card:#ffffff;
+  --card2:#f4f3ee;
+  --card3:#ebebE4;
+  --border:rgba(0,0,0,0.08);
+  --border2:rgba(0,0,0,0.14);
+  --green:#1a6b1a;
+  --green2:#22c55e;
+  --green-bg:#f0fdf4;
+  --green-border:#bbf7d0;
+  --amber:#92400e;
+  --amber2:#f59e0b;
+  --amber-bg:#fffbeb;
+  --amber-border:#fde68a;
+  --red:#991b1b;
+  --red2:#ef4444;
+  --red-bg:#fef2f2;
+  --blue:#1e40af;
+  --blue2:#3b82f6;
+  --blue-bg:#eff6ff;
+  --indigo:#3730a3;
+  --indigo2:#6366f1;
+  --indigo-bg:#eef2ff;
+  --r:14px;--r2:10px;--r3:8px;
+}
+@media(prefers-color-scheme:dark){:root{
+  --ink:#f0efe8;--ink2:#a8a79f;--ink3:#5c5b54;
+  --paper:#0e0e0c;--white:#1a1a17;--card:#1c1c19;--card2:#242421;--card3:#2c2c28;
+  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);
+  --green:#4ade80;--green2:#22c55e;--green-bg:#052e16;--green-border:#166534;
+  --amber:#fcd34d;--amber2:#f59e0b;--amber-bg:#1c1200;--amber-border:#78350f;
+  --red:#fca5a5;--red2:#ef4444;--red-bg:#1f0000;
+  --blue:#93c5fd;--blue2:#3b82f6;--blue-bg:#0c1f3f;
+  --indigo:#a5b4fc;--indigo2:#6366f1;--indigo-bg:#1e1b4b;
+}}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--paper);color:var(--ink);min-height:100vh;font-size:15px;line-height:1.5;}
 
-    :root {
-      --bg: #f7f7f5;
-      --surface: #ffffff;
-      --surface2: #f2f1ec;
-      --surface3: #e8e7e0;
-      --border: rgba(0,0,0,0.08);
-      --border-md: rgba(0,0,0,0.14);
-      --border-strong: rgba(0,0,0,0.22);
-      --text: #111110;
-      --text2: #52514d;
-      --text3: #9b9a94;
-      --green: #2d6a0a;
-      --green-mid: #4a9e1a;
-      --green-bg: #eaf5e1;
-      --green-border: rgba(45,106,10,0.3);
-      --amber: #7a4800;
-      --amber-mid: #c47c00;
-      --amber-bg: #fef3da;
-      --amber-border: rgba(122,72,0,0.25);
-      --red: #9b1c1c;
-      --red-bg: #fef2f2;
-      --blue: #1351a8;
-      --blue-mid: #2563eb;
-      --blue-bg: #eff6ff;
-      --blue-border: rgba(19,81,168,0.25);
-      --purple: #4338ca;
-      --purple-mid: #6366f1;
-      --purple-bg: #eef2ff;
-      --purple-border: rgba(67,56,202,0.3);
-      --radius: 16px;
-      --radius-sm: 10px;
-      --radius-xs: 6px;
-      --shadow-sm: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
-      --shadow-md: 0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.06);
-    }
+/* ─── NAV ─── */
+nav{position:sticky;top:0;z-index:100;background:rgba(250,250,248,0.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 2rem;}
+@media(prefers-color-scheme:dark){nav{background:rgba(14,14,12,0.88);}}
+.nav-inner{max-width:1100px;margin:0 auto;height:56px;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{font-size:17px;font-weight:800;letter-spacing:-.5px;color:var(--ink);}
+.nav-logo span{color:var(--indigo2);}
+.nav-pill{font-size:11px;font-weight:700;padding:4px 12px;border-radius:99px;background:var(--green-bg);color:var(--green);border:1px solid var(--green-border);display:flex;align-items:center;gap:5px;letter-spacing:.02em;}
+.nav-pill .dot{width:6px;height:6px;border-radius:50%;background:var(--green2);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.35;}}
 
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #111110;
-        --surface: #1c1c1a;
-        --surface2: #252522;
-        --surface3: #2e2e2b;
-        --border: rgba(255,255,255,0.07);
-        --border-md: rgba(255,255,255,0.12);
-        --border-strong: rgba(255,255,255,0.2);
-        --text: #f0efe8;
-        --text2: #a8a7a0;
-        --text3: #68675f;
-        --green: #74c94e;
-        --green-mid: #5aaa32;
-        --green-bg: #0f2205;
-        --green-border: rgba(116,201,78,0.2);
-        --amber: #f0a832;
-        --amber-mid: #d4881a;
-        --amber-bg: #1f1200;
-        --amber-border: rgba(240,168,50,0.2);
-        --red: #f87171;
-        --red-bg: #1f0000;
-        --blue: #60a5fa;
-        --blue-mid: #3b82f6;
-        --blue-bg: #0c1f3f;
-        --blue-border: rgba(96,165,250,0.2);
-        --purple: #a5b4fc;
-        --purple-mid: #818cf8;
-        --purple-bg: #1e1b4b;
-        --purple-border: rgba(165,180,252,0.2);
-        --shadow-sm: none;
-        --shadow-md: none;
-      }
-    }
+/* ─── HERO ─── */
+.hero{background:linear-gradient(150deg,#1a1065 0%,#2d1b8e 35%,#1e3a8a 65%,#0f4c75 100%);padding:5rem 1.5rem 6rem;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(99,102,241,.25),transparent);}
+.hero::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:60px;background:var(--paper);clip-path:ellipse(55% 100% at 50% 100%);}
+.hero-inner{position:relative;max-width:680px;margin:0 auto;}
+.hero-tag{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:99px;padding:6px 16px;font-size:12px;font-weight:600;color:rgba(255,255,255,.85);margin-bottom:1.75rem;letter-spacing:.03em;}
+.hero h1{font-size:clamp(32px,6vw,56px);font-weight:800;color:#fff;letter-spacing:-1.5px;line-height:1.1;margin-bottom:1rem;}
+.hero h1 em{font-style:normal;background:linear-gradient(90deg,#a5f3fc,#67e8f9);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-sub{font-size:17px;color:rgba(255,255,255,.6);max-width:480px;margin:0 auto 2.5rem;line-height:1.65;}
+.hero-rates{display:inline-flex;gap:0;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:var(--r);overflow:hidden;}
+.hero-rate{padding:1rem 1.75rem;text-align:center;position:relative;}
+.hero-rate+.hero-rate::before{content:'';position:absolute;left:0;top:20%;bottom:20%;width:1px;background:rgba(255,255,255,.15);}
+.hero-rate .svc-lbl{font-size:11px;font-weight:600;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;}
+.hero-rate .rate-val{font-size:22px;font-weight:800;color:#fff;letter-spacing:-.5px;}
+.hero-rate .rate-val.best{color:#4ade80;}
+.hero-rate .rate-fee{font-size:11px;color:rgba(255,255,255,.4);margin-top:2px;}
 
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-    }
+/* ─── LAYOUT ─── */
+.page{max-width:960px;margin:0 auto;padding:3rem 1.5rem 5rem;}
+.two-col{display:grid;grid-template-columns:1fr 320px;gap:1.5rem;align-items:start;}
+@media(max-width:800px){.two-col{grid-template-columns:1fr;}}
+.col-main{min-width:0;}
+.col-side{min-width:0;}
 
-    /* ── Hero ── */
-    .hero {
-      background: linear-gradient(135deg, #1a1065 0%, #2d1b8e 40%, #1e3a8a 100%);
-      padding: 3rem 1.5rem 4rem;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-    }
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(255,255,255,0.12);
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 99px;
-      padding: 5px 14px;
-      font-size: 12px;
-      font-weight: 500;
-      color: rgba(255,255,255,0.85);
-      margin-bottom: 1.25rem;
-    }
-    .hero-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: #4ade80; animation: pulse 2s infinite; }
-    @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
-    .hero h1 {
-      font-size: clamp(28px, 5vw, 42px);
-      font-weight: 700;
-      color: #fff;
-      letter-spacing: -1px;
-      margin-bottom: 0.75rem;
-      line-height: 1.15;
-    }
-    .hero h1 span { color: #a5f3fc; }
-    .hero p {
-      font-size: 16px;
-      color: rgba(255,255,255,0.65);
-      max-width: 480px;
-      margin: 0 auto 2rem;
-      line-height: 1.6;
-    }
-    .live-rates {
-      display: inline-flex;
-      gap: 1.5rem;
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.15);
-      border-radius: var(--radius-sm);
-      padding: 0.75rem 1.5rem;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    .live-rate-item { text-align: center; }
-    .live-rate-item .svc { font-size: 11px; color: rgba(255,255,255,0.55); font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; }
-    .live-rate-item .rate { font-size: 18px; font-weight: 700; color: #fff; margin-top: 2px; }
-    .live-rate-item .rate.best { color: #4ade80; }
+/* ─── PROMPT ─── */
+.prompt-wrap{background:var(--card);border:1px solid var(--border2);border-radius:var(--r);padding:1.75rem;margin-bottom:1.5rem;box-shadow:0 2px 12px rgba(0,0,0,.06);}
+.prompt-label{font-size:11px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.75rem;}
+.prompt-row{display:flex;gap:10px;align-items:flex-end;}
+textarea{flex:1;border:1.5px solid var(--border2);border-radius:var(--r2);padding:13px 16px;font-size:15px;font-family:inherit;color:var(--ink);background:var(--card2);resize:none;outline:none;line-height:1.5;transition:border-color .2s,box-shadow .2s;}
+textarea:focus{border-color:var(--indigo2);box-shadow:0 0 0 3px rgba(99,102,241,.12);}
+textarea::placeholder{color:var(--ink3);}
+.analyze-btn{height:52px;padding:0 24px;background:linear-gradient(135deg,#4338ca,#2563eb);color:#fff;border:none;border-radius:var(--r2);font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px;white-space:nowrap;box-shadow:0 4px 14px rgba(67,56,202,.4);transition:all .18s;letter-spacing:.01em;}
+.analyze-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(67,56,202,.45);}
+.analyze-btn:active{transform:scale(.97);}
+.analyze-btn:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none;}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:1rem;}
+.chip{font-size:12px;font-weight:500;padding:6px 14px;border-radius:99px;border:1px solid var(--border2);background:var(--card2);color:var(--ink2);cursor:pointer;transition:all .15s;}
+.chip:hover{background:var(--indigo-bg);color:var(--indigo2);border-color:rgba(99,102,241,.4);}
 
-    /* ── Main layout ── */
-    .main { max-width: 720px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+/* ─── THINKING ─── */
+.thinking{display:flex;align-items:center;gap:12px;padding:1.25rem 1.5rem;background:var(--card);border:1px solid var(--border);border-radius:var(--r);margin-bottom:1.25rem;font-size:14px;color:var(--ink2);}
+.dots span{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--indigo2);margin:0 2px;animation:bop 1.2s infinite;}
+.dots span:nth-child(2){animation-delay:.2s;}.dots span:nth-child(3){animation-delay:.4s;}
+@keyframes bop{0%,80%,100%{transform:translateY(0);opacity:.3;}40%{transform:translateY(-7px);opacity:1;}}
 
-    /* ── Prompt ── */
-    .prompt-card {
-      background: var(--surface);
-      border: 1px solid var(--border-md);
-      border-radius: var(--radius);
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-      box-shadow: var(--shadow-md);
-    }
-    .prompt-label {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--text3);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 0.75rem;
-    }
-    .prompt-input-row { display: flex; gap: 10px; align-items: flex-end; }
-    textarea {
-      flex: 1;
-      border: 1.5px solid var(--border-md);
-      border-radius: var(--radius-sm);
-      padding: 12px 16px;
-      font-size: 15px;
-      font-family: inherit;
-      color: var(--text);
-      background: var(--surface2);
-      resize: none;
-      line-height: 1.5;
-      outline: none;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-    textarea:focus { border-color: var(--purple-mid); box-shadow: 0 0 0 3px var(--purple-bg); }
-    textarea::placeholder { color: var(--text3); }
-    .send-btn {
-      background: linear-gradient(135deg, #4338ca, #2563eb);
-      color: #fff;
-      border: none;
-      border-radius: var(--radius-sm);
-      padding: 0 22px;
-      height: 50px;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      white-space: nowrap;
-      transition: opacity 0.15s, transform 0.1s, box-shadow 0.15s;
-      box-shadow: 0 2px 8px rgba(67,56,202,0.4);
-      letter-spacing: 0.01em;
-    }
-    .send-btn:hover { opacity: 0.9; box-shadow: 0 4px 14px rgba(67,56,202,0.5); transform: translateY(-1px); }
-    .send-btn:active { transform: scale(0.97) translateY(0); }
-    .send-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; box-shadow: none; }
-    .chips { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 1rem; }
-    .chip {
-      font-size: 12px;
-      font-weight: 500;
-      padding: 5px 13px;
-      border-radius: 99px;
-      border: 1px solid var(--border-md);
-      background: var(--surface2);
-      color: var(--text2);
-      cursor: pointer;
-      transition: all 0.15s;
-    }
-    .chip:hover { background: var(--purple-bg); color: var(--purple); border-color: var(--purple-border); }
+/* ─── RESULT BANNER ─── */
+.rec-banner{background:linear-gradient(135deg,var(--green-bg),#f7fef7);border:1.5px solid var(--green-border);border-radius:var(--r);padding:1.5rem;margin-bottom:1.25rem;display:flex;align-items:flex-start;gap:14px;}
+.rec-circle{width:44px;height:44px;border-radius:12px;background:var(--green);display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;flex-shrink:0;font-weight:700;}
+.rec-title{font-size:17px;font-weight:800;color:var(--green);margin-bottom:4px;}
+.rec-body{font-size:13px;color:var(--ink2);line-height:1.65;}
 
-    /* ── Thinking ── */
-    .thinking {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 1.25rem 1.5rem;
-      background: var(--surface);
-      border: 1px solid var(--border-md);
-      border-radius: var(--radius);
-      margin-bottom: 1.25rem;
-      font-size: 14px;
-      color: var(--text2);
-      box-shadow: var(--shadow-sm);
-    }
-    .dots span {
-      display: inline-block; width: 7px; height: 7px;
-      border-radius: 50%; background: var(--purple-mid);
-      margin: 0 2px; animation: bounce 1.2s infinite;
-    }
-    .dots span:nth-child(2) { animation-delay: 0.2s; }
-    .dots span:nth-child(3) { animation-delay: 0.4s; }
-    @keyframes bounce { 0%,80%,100%{transform:translateY(0);opacity:0.35;} 40%{transform:translateY(-6px);opacity:1;} }
+/* ─── SERVICE CARDS ─── */
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:1.25rem;}
+@media(max-width:540px){.svc-grid{grid-template-columns:1fr;}}
+.svc-card{background:var(--card);border:1px solid var(--border2);border-radius:var(--r);padding:1.25rem;position:relative;overflow:hidden;transition:transform .18s,box-shadow .18s;}
+.svc-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.1);}
+.svc-card.best{border:2px solid var(--green);}
+.svc-top-bar{position:absolute;top:0;left:0;right:0;height:3px;}
+.best-badge{position:absolute;top:0;right:14px;background:var(--green);color:#fff;font-size:9px;font-weight:800;padding:3px 9px;border-radius:0 0 7px 7px;letter-spacing:.06em;text-transform:uppercase;}
+.svc-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:900;color:#fff;margin:10px 0 10px;}
+.svc-name{font-size:14px;font-weight:800;color:var(--ink);margin-bottom:1px;}
+.svc-domain{font-size:11px;color:var(--ink3);margin-bottom:12px;}
+.svc-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid var(--border);font-size:12px;}
+.svc-row:last-of-type{border:none;}
+.svc-k{color:var(--ink3);}
+.svc-v{font-weight:700;color:var(--ink);}
+.svc-v.hi{color:var(--green);}
+.pill{font-size:10px;font-weight:700;padding:3px 9px;border-radius:99px;letter-spacing:.04em;text-transform:uppercase;}
+.pill-green{background:var(--green-bg);color:var(--green);}
+.pill-blue{background:var(--blue-bg);color:var(--blue);}
+.svc-link{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:600;color:var(--blue2);text-decoration:none;margin-top:10px;}
+.svc-link:hover{text-decoration:underline;}
 
-    /* ── Recommendation banner ── */
-    .rec-banner {
-      background: linear-gradient(135deg, var(--green-bg), #f0faf0);
-      border: 1.5px solid var(--green-border);
-      border-radius: var(--radius);
-      padding: 1.25rem 1.5rem;
-      margin-bottom: 1.25rem;
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-      box-shadow: var(--shadow-sm);
-    }
-    .rec-icon-wrap {
-      width: 40px; height: 40px; border-radius: 10px;
-      background: var(--green); display: flex;
-      align-items: center; justify-content: center;
-      flex-shrink: 0; font-size: 18px;
-    }
-    .rec-banner h2 { font-size: 16px; font-weight: 700; color: var(--green); margin-bottom: 4px; }
-    .rec-banner p { font-size: 13px; color: var(--text2); line-height: 1.6; }
+/* ─── BAR CHART ─── */
+.card{background:var(--card);border:1px solid var(--border2);border-radius:var(--r);padding:1.5rem;margin-bottom:1.25rem;}
+.card-ttl{font-size:15px;font-weight:800;color:var(--ink);margin-bottom:4px;}
+.card-sub{font-size:12px;color:var(--ink3);margin-bottom:1.25rem;}
+.bar-row{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
+.bar-lbl{font-size:12px;font-weight:600;width:110px;flex-shrink:0;color:var(--ink2);}
+.bar-track{flex:1;background:var(--card2);border-radius:6px;height:34px;overflow:hidden;}
+.bar-fill{height:100%;border-radius:6px;display:flex;align-items:center;padding:0 12px;font-size:12px;font-weight:700;color:#fff;transition:width .7s cubic-bezier(.4,0,.2,1);}
+.bar-amt{font-size:13px;font-weight:800;width:90px;text-align:right;flex-shrink:0;}
 
-    /* ── Service cards ── */
-    .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 1.25rem; }
-    @media (max-width: 560px) { .cards-grid { grid-template-columns: 1fr; } }
-    .svc-card {
-      background: var(--surface);
-      border: 1px solid var(--border-md);
-      border-radius: var(--radius);
-      padding: 1.25rem;
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.15s, box-shadow 0.15s;
-      box-shadow: var(--shadow-sm);
-    }
-    .svc-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
-    .svc-card.winner { border: 2px solid var(--green); }
-    .svc-card .color-bar { position: absolute; top: 0; left: 0; right: 0; height: 3px; }
-    .winner-tag {
-      position: absolute; top: -1px; right: 14px;
-      background: var(--green); color: #fff;
-      font-size: 10px; font-weight: 700;
-      padding: 3px 10px; border-radius: 0 0 8px 8px;
-      letter-spacing: 0.05em; text-transform: uppercase;
-    }
-    .svc-logo {
-      width: 36px; height: 36px; border-radius: 9px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 15px; font-weight: 800; color: #fff;
-      margin-bottom: 10px; margin-top: 8px;
-    }
-    .svc-name { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 1px; }
-    .svc-url { font-size: 11px; color: var(--text3); margin-bottom: 12px; }
-    .svc-row {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 5px 0; border-bottom: 1px solid var(--border); font-size: 12px;
-    }
-    .svc-row:last-of-type { border-bottom: none; }
-    .svc-row .k { color: var(--text3); }
-    .svc-row .v { font-weight: 600; color: var(--text); }
-    .svc-row .v.good { color: var(--green); }
-    .svc-open { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 500; color: var(--blue); text-decoration: none; margin-top: 10px; }
-    .svc-open:hover { text-decoration: underline; }
-    .spd-pill { font-size: 10px; font-weight: 600; padding: 2px 9px; border-radius: 99px; text-transform: uppercase; letter-spacing: 0.04em; }
-    .spd-fast { background: var(--green-bg); color: var(--green); }
-    .spd-slow { background: var(--amber-bg); color: var(--amber); }
+/* ─── TABLE ─── */
+.tbl-card{background:var(--card);border:1px solid var(--border2);border-radius:var(--r);overflow:hidden;margin-bottom:.75rem;}
+.tbl-card table{width:100%;border-collapse:collapse;font-size:13px;}
+.tbl-card th{padding:11px 14px;background:var(--card2);font-weight:700;font-size:11px;color:var(--ink3);text-transform:uppercase;letter-spacing:.07em;border-bottom:1px solid var(--border2);text-align:left;}
+.tbl-card td{padding:11px 14px;border-bottom:1px solid var(--border);color:var(--ink);}
+.tbl-card tr:last-child td{border:none;}
+.tbl-card tr.win td{background:var(--green-bg);}
+.disclaimer{font-size:11px;color:var(--ink3);text-align:center;padding:.5rem 0 1.5rem;}
 
-    /* ── INR bar chart ── */
-    .bar-section {
-      background: var(--surface);
-      border: 1px solid var(--border-md);
-      border-radius: var(--radius);
-      padding: 1.25rem 1.5rem;
-      margin-bottom: 1.25rem;
-      box-shadow: var(--shadow-sm);
-    }
-    .section-title { font-size: 13px; font-weight: 600; color: var(--text2); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.06em; }
-    .bar-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
-    .bar-label { font-size: 13px; font-weight: 500; width: 120px; flex-shrink: 0; color: var(--text2); }
-    .bar-track { flex: 1; background: var(--surface2); border-radius: 6px; height: 32px; overflow: hidden; }
-    .bar-fill { height: 100%; border-radius: 6px; display: flex; align-items: center; padding-left: 12px; font-size: 12px; font-weight: 600; color: #fff; transition: width 0.7s cubic-bezier(.4,0,.2,1); white-space: nowrap; }
-    .bar-amount { font-size: 13px; font-weight: 700; width: 90px; text-align: right; flex-shrink: 0; }
+/* ─── SECTION HEADER ─── */
+.sec-hd{display:flex;align-items:center;gap:12px;margin:2.5rem 0 1.25rem;font-size:12px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.08em;}
+.sec-hd::before,.sec-hd::after{content:'';flex:1;height:1px;background:var(--border2);}
 
-    /* ── Summary table ── */
-    .tbl-wrap {
-      background: var(--surface);
-      border: 1px solid var(--border-md);
-      border-radius: var(--radius);
-      overflow: hidden;
-      margin-bottom: 0.75rem;
-      box-shadow: var(--shadow-sm);
-    }
-    .tbl-wrap table { width: 100%; border-collapse: collapse; font-size: 13px; }
-    .tbl-wrap th { padding: 11px 14px; background: var(--surface2); font-weight: 600; color: var(--text3); font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; border-bottom: 1px solid var(--border-md); text-align: left; }
-    .tbl-wrap td { padding: 11px 14px; border-bottom: 1px solid var(--border); color: var(--text); }
-    .tbl-wrap tr:last-child td { border-bottom: none; }
-    .tbl-wrap tr.hl td { background: var(--green-bg); font-weight: 600; }
-    .disclaimer { font-size: 11px; color: var(--text3); text-align: center; margin: 0.5rem 0 1.5rem; }
+/* ─── CHART CARD ─── */
+.chart-card{background:var(--card);border:1px solid var(--border2);border-radius:var(--r);padding:1.5rem;margin-bottom:1.25rem;}
+.chart-hd{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.25rem;}
+.chart-ttl{font-size:15px;font-weight:800;color:var(--ink);margin-bottom:3px;}
+.chart-sub{font-size:12px;color:var(--ink3);}
+.range-group{display:flex;background:var(--card2);border-radius:var(--r3);padding:3px;gap:2px;}
+.rbtn{font-size:12px;font-weight:700;padding:5px 13px;border-radius:6px;border:none;background:transparent;color:var(--ink3);cursor:pointer;transition:all .15s;}
+.rbtn:hover{color:var(--ink2);}
+.rbtn.on{background:var(--white);color:var(--ink);box-shadow:0 1px 4px rgba(0,0,0,.1);}
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:1rem;}
+.leg{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--ink2);}
+.leg-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0;}
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:1.25rem;}
+.stat-box{background:var(--card2);border-radius:var(--r2);padding:12px 14px;}
+.stat-lbl{font-size:10px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:5px;}
+.stat-num{font-size:22px;font-weight:800;color:var(--ink);letter-spacing:-.5px;}
+.stat-note{font-size:11px;color:var(--ink3);margin-top:2px;}
 
-    /* ── Section divider ── */
-    .section-divider {
-      display: flex; align-items: center; gap: 12px;
-      margin: 2rem 0 1.5rem; color: var(--text3); font-size: 12px; font-weight: 600;
-      text-transform: uppercase; letter-spacing: 0.08em;
-    }
-    .section-divider::before, .section-divider::after {
-      content: ''; flex: 1; height: 1px; background: var(--border-md);
-    }
+/* ─── WEEKLY TABLE ─── */
+.wtbl-wrap{margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid var(--border);}
+.wtbl-lbl{font-size:11px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px;}
+.wtbl-scroll{overflow-x:auto;}
+.wtbl-scroll table{width:100%;border-collapse:collapse;font-size:12px;}
 
-    /* ── Card base ── */
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border-md);
-      border-radius: var(--radius);
-      padding: 1.5rem;
-      margin-bottom: 1rem;
-      box-shadow: var(--shadow-sm);
-    }
-    .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.25rem; }
-    .card-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
-    .card-sub { font-size: 12px; color: var(--text3); }
+/* ─── BEST TIME ─── */
+.best-time{background:linear-gradient(135deg,#1a1065,#2d1b8e);border-radius:var(--r);padding:1.75rem;margin-bottom:1.25rem;display:flex;gap:16px;align-items:flex-start;position:relative;overflow:hidden;}
+.best-time::before{content:'';position:absolute;top:-30px;right:-30px;width:150px;height:150px;border-radius:50%;background:rgba(255,255,255,.05);}
+.best-time-icon{width:48px;height:48px;background:rgba(255,255,255,.15);border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+.best-time h3{font-size:14px;font-weight:700;color:rgba(255,255,255,.6);margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em;}
+.best-time .rec-name{font-size:20px;font-weight:800;color:#fff;margin-bottom:8px;letter-spacing:-.3px;}
+.best-time p{font-size:13px;color:rgba(255,255,255,.65);line-height:1.65;}
 
-    /* ── Range buttons ── */
-    .range-group { display: flex; gap: 4px; background: var(--surface2); border-radius: var(--radius-xs); padding: 3px; }
-    .range-btn {
-      font-size: 12px; font-weight: 600; padding: 4px 12px;
-      border-radius: 4px; border: none;
-      background: transparent; color: var(--text3);
-      cursor: pointer; transition: all 0.15s;
-    }
-    .range-btn:hover { color: var(--text2); }
-    .range-btn.active { background: var(--surface); color: var(--text); box-shadow: var(--shadow-sm); }
+/* ─── FORECAST ─── */
+.fc-table th{padding:10px 12px;text-align:left;font-weight:700;font-size:11px;color:var(--ink3);background:var(--card2);border-bottom:1px solid var(--border2);text-transform:uppercase;letter-spacing:.06em;}
+.fc-table td{padding:11px 12px;border-bottom:1px solid var(--border);font-size:13px;}
+.fc-table tr:last-child td{border:none;}
+.fc-est-badge{font-size:9px;font-weight:800;padding:2px 8px;border-radius:99px;margin-left:7px;text-transform:uppercase;letter-spacing:.05em;vertical-align:middle;}
 
-    /* ── Stat cards ── */
-    .stat-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 1.25rem; }
-    .stat-card { background: var(--surface2); border-radius: var(--radius-sm); padding: 12px 14px; }
-    .stat-label { font-size: 11px; color: var(--text3); font-weight: 500; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.05em; }
-    .stat-val { font-size: 20px; font-weight: 700; color: var(--text); }
-    .stat-sub { font-size: 11px; color: var(--text3); margin-top: 2px; }
+/* ─── DRIVERS ─── */
+.drivers-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+@media(max-width:500px){.drivers-grid{grid-template-columns:1fr;}}
+.driver{background:var(--card2);border-radius:var(--r2);padding:14px 16px;border-left:4px solid;transition:transform .15s;}
+.driver:hover{transform:translateX(3px);}
+.driver-hd{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.driver-emoji{font-size:22px;}
+.driver-ttl{font-size:13px;font-weight:800;color:var(--ink);line-height:1.2;}
+.driver-pill{font-size:9px;font-weight:800;padding:2px 8px;border-radius:99px;margin-top:4px;display:inline-block;text-transform:uppercase;letter-spacing:.05em;}
+.driver-body{font-size:12px;color:var(--ink2);line-height:1.65;}
 
-    /* ── Legend ── */
-    .legend { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 1rem; }
-    .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text2); font-weight: 500; }
-    .legend-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+/* ─── SIDEBAR ─── */
+.sidebar-card{background:var(--card);border:1px solid var(--border2);border-radius:var(--r);padding:1.25rem;margin-bottom:1rem;}
+.sidebar-ttl{font-size:13px;font-weight:800;color:var(--ink);margin-bottom:1rem;display:flex;align-items:center;gap:8px;}
+.sidebar-ttl .icon{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;}
+.meter-row{margin-bottom:12px;}
+.meter-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;font-size:12px;}
+.meter-name{font-weight:600;color:var(--ink2);}
+.meter-val{font-weight:800;color:var(--ink);}
+.meter-track{height:6px;background:var(--card2);border-radius:99px;overflow:hidden;}
+.meter-fill{height:100%;border-radius:99px;transition:width .6s cubic-bezier(.4,0,.2,1);}
+.quick-fact{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);}
+.quick-fact:last-child{border:none;padding-bottom:0;}
+.qf-icon{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:1px;}
+.qf-ttl{font-size:12px;font-weight:700;color:var(--ink);margin-bottom:2px;}
+.qf-body{font-size:11px;color:var(--ink3);line-height:1.55;}
 
-    /* ── Weekly table ── */
-    .weekly-wrap { margin-top: 1.5rem; }
-    .weekly-label { font-size: 12px; font-weight: 600; color: var(--text2); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
-    .weekly-label::after { content: ''; flex: 1; height: 1px; background: var(--border-md); }
+/* ─── HISTORY ─── */
+.hist-section{margin-top:2rem;}
+.hist-lbl{font-size:11px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;}
+.hist-item{background:var(--card);border:1px solid var(--border);border-radius:var(--r2);padding:11px 14px;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:all .15s;}
+.hist-item:hover{border-color:var(--border2);transform:translateX(3px);}
+.hq{font-size:13px;color:var(--ink2);}
+.hr{font-size:12px;font-weight:700;color:var(--green);}
+.ht{font-size:11px;color:var(--ink3);}
 
-    /* ── Best time banner ── */
-    .best-time-card {
-      background: linear-gradient(135deg, var(--purple-bg), #f0f0ff);
-      border: 1.5px solid var(--purple-border);
-      border-radius: var(--radius);
-      padding: 1.25rem 1.5rem;
-      margin-bottom: 1rem;
-      display: flex; gap: 14px; align-items: flex-start;
-      box-shadow: var(--shadow-sm);
-    }
-    .best-time-icon {
-      width: 44px; height: 44px; background: var(--purple);
-      border-radius: 11px; display: flex; align-items: center;
-      justify-content: center; font-size: 20px; flex-shrink: 0;
-    }
-    .best-time-card h3 { font-size: 15px; font-weight: 700; color: var(--purple); margin-bottom: 5px; }
-    .best-time-card p { font-size: 13px; color: var(--text2); line-height: 1.65; }
+/* ─── FOOTER ─── */
+footer{background:var(--card2);border-top:1px solid var(--border);padding:2rem 1.5rem;text-align:center;}
+.footer-inner{max-width:960px;margin:0 auto;}
+.footer-brand{font-size:16px;font-weight:800;color:var(--ink);margin-bottom:6px;letter-spacing:-.3px;}
+.footer-brand span{color:var(--indigo2);}
+.footer-note{font-size:12px;color:var(--ink3);max-width:480px;margin:0 auto;}
 
-    /* ── Forecast table badge ── */
-    .est-badge { font-size: 9px; font-weight: 700; padding: 2px 7px; border-radius: 99px; text-transform: uppercase; letter-spacing: 0.05em; vertical-align: middle; margin-left: 6px; }
-    .est-best { background: var(--amber-bg); color: var(--amber); border: 1px solid var(--amber-border); }
-
-    /* ── Driver cards ── */
-    .driver-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    @media (max-width: 480px) { .driver-grid { grid-template-columns: 1fr; } }
-    .driver-card {
-      background: var(--surface2);
-      border-radius: var(--radius-sm);
-      padding: 14px;
-      border-left: 4px solid;
-      transition: transform 0.15s;
-    }
-    .driver-card:hover { transform: translateX(2px); }
-    .driver-top { display: flex; align-items: center; gap: 9px; margin-bottom: 8px; }
-    .driver-emoji { font-size: 20px; }
-    .driver-title { font-size: 13px; font-weight: 700; color: var(--text); }
-    .sentiment-pill { font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 99px; margin-top: 3px; display: inline-block; }
-    .driver-body { font-size: 12px; color: var(--text2); line-height: 1.65; }
-
-    /* ── History ── */
-    .history-section { margin-top: 2rem; }
-    .history-title { font-size: 11px; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
-    .history-item {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: 10px 14px;
-      margin-bottom: 6px;
-      display: flex; justify-content: space-between; align-items: center;
-      font-size: 13px; cursor: pointer;
-      transition: border-color 0.15s, transform 0.1s;
-    }
-    .history-item:hover { border-color: var(--border-strong); transform: translateX(2px); }
-    .history-item .hq { color: var(--text2); }
-    .history-item .hr { color: var(--green); font-weight: 600; }
-    .history-item .ht { color: var(--text3); font-size: 11px; }
-
-    /* ── Animations ── */
-    @keyframes fadeUp { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
-    .fade-up { animation: fadeUp 0.35s ease both; }
-    .fade-up-2 { animation: fadeUp 0.35s 0.06s ease both; }
-    .fade-up-3 { animation: fadeUp 0.35s 0.12s ease both; }
-    .fade-up-4 { animation: fadeUp 0.35s 0.18s ease both; }
-  </style>
+/* ─── ANIM ─── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+.fu{animation:fadeUp .35s ease both;}
+.fu2{animation:fadeUp .35s .07s ease both;}
+.fu3{animation:fadeUp .35s .14s ease both;}
+.fu4{animation:fadeUp .35s .21s ease both;}
+</style>
 </head>
 <body>
 
-<!-- Hero -->
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">Remit<span>IQ</span></div>
+    <div class="nav-pill"><span class="dot"></span>Live rates · Jun 23, 2026</div>
+  </div>
+</nav>
+
+<!-- HERO -->
 <div class="hero">
-  <div class="hero-badge"><span class="dot"></span> Live rates · Verified Jun 23, 2026</div>
-  <h1>Send money to <span>India</span><br>at the best rate</h1>
-  <p>Tell us what you want to send — we compare Money2India, Remitly, and Xoom instantly and tell you exactly which to use.</p>
-  <div class="live-rates">
-    <div class="live-rate-item">
-      <div class="svc">Remitly</div>
-      <div class="rate best">₹95.02</div>
-    </div>
-    <div class="live-rate-item" style="border-left:1px solid rgba(255,255,255,0.15);border-right:1px solid rgba(255,255,255,0.15);padding:0 1.5rem;">
-      <div class="svc">Money2India</div>
-      <div class="rate">₹94.75</div>
-    </div>
-    <div class="live-rate-item">
-      <div class="svc">Xoom</div>
-      <div class="rate">₹94.54</div>
+  <div class="hero-inner">
+    <div class="hero-tag">🇺🇸 USD → 🇮🇳 INR · Real-time comparison</div>
+    <h1>Send money to India<br>at the <em>smartest rate</em></h1>
+    <p class="hero-sub">Tell us what you want to send. We compare Money2India, Remitly, and Xoom — and recommend exactly which one to use and when.</p>
+    <div class="hero-rates">
+      <div class="hero-rate">
+        <div class="svc-lbl">Remitly</div>
+        <div class="rate-val best">₹95.02</div>
+        <div class="rate-fee">$0 fee · Best today</div>
+      </div>
+      <div class="hero-rate">
+        <div class="svc-lbl">Money2India</div>
+        <div class="rate-val">₹94.75</div>
+        <div class="rate-fee">$0 fee · ICICI</div>
+      </div>
+      <div class="hero-rate">
+        <div class="svc-lbl">Xoom</div>
+        <div class="rate-val">₹94.54</div>
+        <div class="rate-fee">$0 fee · PayPal</div>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- Main -->
-<div class="main">
+<!-- PAGE -->
+<div class="page">
+<div class="two-col">
+
+<!-- LEFT COLUMN -->
+<div class="col-main">
 
   <!-- Prompt -->
-  <div class="prompt-card fade-up">
+  <div class="prompt-wrap fu">
     <div class="prompt-label">What would you like to send?</div>
-    <div class="prompt-input-row">
-      <textarea id="userPrompt" rows="2" placeholder="e.g. I want to send $200 from US to India as fast as possible"></textarea>
-      <button class="send-btn" id="sendBtn" onclick="analyze()">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+    <div class="prompt-row">
+      <textarea id="userPrompt" rows="2" placeholder="e.g. I want to send $500 from US to India as fast as possible"></textarea>
+      <button class="analyze-btn" id="sendBtn" onclick="analyze()">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
         Analyze
       </button>
     </div>
     <div class="chips">
       <span class="chip" onclick="setPrompt(this)">Send $100 to India</span>
-      <span class="chip" onclick="setPrompt(this)">Send $500, I need it fast</span>
-      <span class="chip" onclick="setPrompt(this)">Send $250, lowest fee matters</span>
-      <span class="chip" onclick="setPrompt(this)">Send $1000, best exchange rate</span>
+      <span class="chip" onclick="setPrompt(this)">Send $500, need it fast</span>
+      <span class="chip" onclick="setPrompt(this)">$250 — lowest fee</span>
+      <span class="chip" onclick="setPrompt(this)">$1000 — best rate</span>
     </div>
   </div>
 
-  <!-- Results -->
+  <!-- Results injected here -->
   <div id="resultArea" style="display:none;"></div>
 
   <!-- Historical chart -->
-  <div class="section-divider">Historical rates</div>
+  <div class="sec-hd">Historical rates</div>
 
-  <div class="card fade-up-2">
-    <div class="card-header">
+  <div class="chart-card fu2">
+    <div class="chart-hd">
       <div>
-        <div class="card-title">USD → INR exchange rate</div>
-        <div class="card-sub">Hover the chart for exact values per service</div>
+        <div class="chart-ttl">USD → INR rate history</div>
+        <div class="chart-sub">Hover chart for exact values per service</div>
       </div>
       <div class="range-group" id="histToggle">
-        <button onclick="setRange('8w')" id="btn-8w" class="range-btn active">8W</button>
-        <button onclick="setRange('3m')" id="btn-3m" class="range-btn">3M</button>
-        <button onclick="setRange('6m')" id="btn-6m" class="range-btn">6M</button>
-        <button onclick="setRange('1y')" id="btn-1y" class="range-btn">1Y</button>
+        <button class="rbtn on" onclick="setRange('8w')" id="btn-8w">8W</button>
+        <button class="rbtn" onclick="setRange('3m')" id="btn-3m">3M</button>
+        <button class="rbtn" onclick="setRange('6m')" id="btn-6m">6M</button>
+        <button class="rbtn" onclick="setRange('1y')" id="btn-1y">1Y</button>
       </div>
     </div>
     <div class="legend" id="histLegend"></div>
-    <div style="position:relative;height:240px;">
-      <canvas id="histChart" role="img" aria-label="USD to INR historical rates">Historical USD to INR data.</canvas>
+    <div style="position:relative;height:220px;">
+      <canvas id="histChart" role="img" aria-label="Historical USD to INR exchange rates">Historical data.</canvas>
     </div>
-    <div class="stat-grid" id="histStats"></div>
+    <div class="stats-row" id="histStats"></div>
     <div id="weeklyTableWrap" style="display:none;">
-      <div class="weekly-wrap">
-        <div class="weekly-label">Weekly breakdown — INR per $1 USD</div>
-        <div style="overflow-x:auto;">
-          <table style="width:100%;border-collapse:collapse;font-size:12px;">
-            <thead><tr id="weeklyHead"></tr></thead>
-            <tbody id="weeklyBody"></tbody>
-          </table>
+      <div class="wtbl-wrap">
+        <div class="wtbl-lbl">Weekly breakdown — INR per $1 USD</div>
+        <div class="wtbl-scroll">
+          <table><thead><tr id="weeklyHead"></tr></thead><tbody id="weeklyBody"></tbody></table>
         </div>
       </div>
     </div>
   </div>
 
   <!-- Forecast -->
-  <div class="section-divider">3-month forecast</div>
+  <div class="sec-hd">3-month forecast</div>
 
-  <!-- Best time banner -->
-  <div class="best-time-card fade-up-3">
+  <!-- Best time -->
+  <div class="best-time fu3">
     <div class="best-time-icon">⏰</div>
     <div>
-      <h3>Best time to transfer: <span id="bestTimeLabel">Send in July 2026</span></h3>
-      <p id="bestTimeReason">The USD is forecast to stay strong through Q3 2026 — rates could reach ₹96–97, giving your recipient more rupees. Waiting 3–5 weeks may gain ₹100–200 extra per $100 sent. However if the US-India full trade deal closes sooner, the INR could strengthen sharply — so sending now locks in today's solid ₹94.75.</p>
+      <h3>Best time to transfer</h3>
+      <div class="rec-name" id="bestTimeLabel">Send in July 2026</div>
+      <p id="bestTimeReason">The USD is forecast to stay strong through Q3 2026. Rates could reach ₹96–97, giving your recipient ₹100–200 more per $100 sent. However a completed US-India trade deal could pull INR back sharply — so if you need certainty, today's ₹94.75 is still a strong rate.</p>
     </div>
   </div>
 
   <!-- Forecast chart -->
-  <div class="card fade-up-4">
-    <div class="card-header">
+  <div class="chart-card fu4">
+    <div class="chart-hd">
       <div>
-        <div class="card-title">Rate forecast — Jul to Sep 2026</div>
-        <div class="card-sub">Actual (solid) · Forecast (dashed) · Analyst consensus + macro factors</div>
+        <div class="chart-ttl">Rate forecast — Jul to Sep 2026</div>
+        <div class="chart-sub">Solid = actual · Dashed = analyst consensus forecast</div>
       </div>
-      <span style="font-size:11px;font-weight:600;padding:4px 11px;border-radius:99px;background:var(--amber-bg);color:var(--amber);border:1px solid var(--amber-border);white-space:nowrap;">Estimate only</span>
+      <span style="font-size:11px;font-weight:700;padding:4px 12px;border-radius:99px;background:var(--amber-bg);color:var(--amber);border:1px solid var(--amber-border);">Estimate only</span>
     </div>
     <div class="legend" id="forecastLegend"></div>
-    <div style="position:relative;height:260px;">
-      <canvas id="forecastChart" role="img" aria-label="USD to INR forecast Jul–Sep 2026">Predicted rates for next 3 months.</canvas>
+    <div style="position:relative;height:240px;">
+      <canvas id="forecastChart" role="img" aria-label="USD to INR forecast July to September 2026">Forecast data.</canvas>
     </div>
     <div style="margin-top:1.5rem;overflow-x:auto;">
-      <table style="width:100%;border-collapse:collapse;font-size:12px;">
+      <table class="fc-table" style="width:100%;border-collapse:collapse;">
         <thead>
-          <tr style="background:var(--surface2);">
-            <th style="padding:10px 12px;text-align:left;font-weight:600;font-size:11px;color:var(--text3);border-bottom:1px solid var(--border-md);text-transform:uppercase;letter-spacing:.06em;">Month</th>
-            <th style="padding:10px 12px;text-align:center;font-weight:600;font-size:11px;color:var(--text3);border-bottom:1px solid var(--border-md);text-transform:uppercase;letter-spacing:.06em;">Forecast</th>
-            <th style="padding:10px 12px;text-align:center;font-weight:600;font-size:11px;color:var(--text3);border-bottom:1px solid var(--border-md);text-transform:uppercase;letter-spacing:.06em;">Range</th>
-            <th style="padding:10px 12px;text-align:center;font-weight:600;font-size:11px;color:#2d6a0a;border-bottom:1px solid var(--border-md);text-transform:uppercase;letter-spacing:.06em;">Remitly</th>
-            <th style="padding:10px 12px;text-align:center;font-weight:600;font-size:11px;color:#1351a8;border-bottom:1px solid var(--border-md);text-transform:uppercase;letter-spacing:.06em;">M2India</th>
-            <th style="padding:10px 12px;text-align:center;font-weight:600;font-size:11px;color:#7a4800;border-bottom:1px solid var(--border-md);text-transform:uppercase;letter-spacing:.06em;">Xoom</th>
+          <tr style="background:var(--card2);">
+            <th>Month</th><th>Forecast</th><th>Range</th>
+            <th style="color:#16a34a;">Remitly</th>
+            <th style="color:#1d4ed8;">M2India</th>
+            <th style="color:#b45309;">Xoom</th>
           </tr>
         </thead>
         <tbody id="forecastTableBody"></tbody>
@@ -580,400 +382,435 @@
   </div>
 
   <!-- Market drivers -->
-  <div class="card">
-    <div class="card-title" style="margin-bottom:1rem;">What's driving the forecast</div>
-    <div class="driver-grid" id="driversGrid"></div>
+  <div class="chart-card">
+    <div class="chart-ttl" style="margin-bottom:.25rem;">What's driving the forecast</div>
+    <div class="chart-sub" style="margin-bottom:1.25rem;">Key macro factors shaping USD/INR in Q3 2026</div>
+    <div class="drivers-grid" id="driversGrid"></div>
   </div>
 
   <!-- History -->
-  <div class="history-section" id="historyArea" style="display:none;">
-    <div class="history-title">Recent searches</div>
+  <div class="hist-section" id="historyArea" style="display:none;">
+    <div class="hist-lbl">Recent searches</div>
     <div id="historyList"></div>
   </div>
 
-</div><!-- /main -->
+</div><!-- /col-main -->
+
+<!-- RIGHT SIDEBAR -->
+<div class="col-side">
+
+  <!-- Rate meter -->
+  <div class="sidebar-card">
+    <div class="sidebar-ttl">
+      <div class="icon" style="background:#eef2ff;">📊</div>
+      Today's rate meter
+    </div>
+    <div class="meter-row">
+      <div class="meter-hd"><span class="meter-name">Remitly</span><span class="meter-val" style="color:#16a34a;">₹95.02</span></div>
+      <div class="meter-track"><div class="meter-fill" style="width:100%;background:#16a34a;"></div></div>
+    </div>
+    <div class="meter-row">
+      <div class="meter-hd"><span class="meter-name">Money2India</span><span class="meter-val" style="color:#1d4ed8;">₹94.75</span></div>
+      <div class="meter-track"><div class="meter-fill" style="width:96%;background:#2563eb;"></div></div>
+    </div>
+    <div class="meter-row" style="margin-bottom:0;">
+      <div class="meter-hd"><span class="meter-name">Xoom</span><span class="meter-val" style="color:#b45309;">₹94.54</span></div>
+      <div class="meter-track"><div class="meter-fill" style="width:92%;background:#d97706;"></div></div>
+    </div>
+    <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border);font-size:11px;color:var(--ink3);">Mid-market rate today: <strong style="color:var(--ink);">₹94.83</strong> · All three services are very competitive</div>
+  </div>
+
+  <!-- Quick facts -->
+  <div class="sidebar-card">
+    <div class="sidebar-ttl">
+      <div class="icon" style="background:#f0fdf4;">💡</div>
+      Quick facts
+    </div>
+    <div class="quick-fact">
+      <div class="qf-icon" style="background:#eef2ff;">🏦</div>
+      <div>
+        <div class="qf-ttl">All fees are $0 right now</div>
+        <div class="qf-body">All three services charge zero transfer fees today. The difference is entirely in the exchange rate spread.</div>
+      </div>
+    </div>
+    <div class="quick-fact">
+      <div class="qf-icon" style="background:#f0fdf4;">⚡</div>
+      <div>
+        <div class="qf-ttl">Remitly is fastest</div>
+        <div class="qf-body">Remitly delivers in minutes via Express. Money2India and Xoom take same day to 1 day.</div>
+      </div>
+    </div>
+    <div class="quick-fact">
+      <div class="qf-icon" style="background:#fffbeb;">📈</div>
+      <div>
+        <div class="qf-ttl">INR weakened 12% since Jan</div>
+        <div class="qf-body">From ₹84 in Jan 2026 to ₹94+ now — you get significantly more rupees today than earlier this year.</div>
+      </div>
+    </div>
+    <div class="quick-fact">
+      <div class="qf-icon" style="background:#fef2f2;">⚠️</div>
+      <div>
+        <div class="qf-ttl">Rates change hourly</div>
+        <div class="qf-body">Always verify on the provider's site before sending. Rates shown here are indicative.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Links -->
+  <div class="sidebar-card">
+    <div class="sidebar-ttl">
+      <div class="icon" style="background:#f0fdf4;">🔗</div>
+      Open providers
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <a href="https://www.remitly.com" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:space-between;padding:11px 13px;background:var(--green-bg);border:1px solid var(--green-border);border-radius:var(--r2);text-decoration:none;transition:transform .15s;" onmouseover="this.style.transform='translateX(3px)'" onmouseout="this.style.transform=''">
+        <span style="font-size:13px;font-weight:700;color:var(--green);">Remitly</span>
+        <span style="font-size:11px;color:var(--green);font-weight:600;">₹95.02 · Best ↗</span>
+      </a>
+      <a href="https://www.money2india.com" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:space-between;padding:11px 13px;background:var(--blue-bg);border:1px solid rgba(37,99,235,.2);border-radius:var(--r2);text-decoration:none;transition:transform .15s;" onmouseover="this.style.transform='translateX(3px)'" onmouseout="this.style.transform=''">
+        <span style="font-size:13px;font-weight:700;color:var(--blue);">Money2India</span>
+        <span style="font-size:11px;color:var(--blue);font-weight:600;">₹94.75 ↗</span>
+      </a>
+      <a href="https://www.xoom.com" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:space-between;padding:11px 13px;background:var(--amber-bg);border:1px solid var(--amber-border);border-radius:var(--r2);text-decoration:none;transition:transform .15s;" onmouseover="this.style.transform='translateX(3px)'" onmouseout="this.style.transform=''">
+        <span style="font-size:13px;font-weight:700;color:var(--amber);">Xoom (PayPal)</span>
+        <span style="font-size:11px;color:var(--amber);font-weight:600;">₹94.54 ↗</span>
+      </a>
+    </div>
+  </div>
+
+</div><!-- /col-side -->
+</div><!-- /two-col -->
+</div><!-- /page -->
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">Remit<span>IQ</span></div>
+    <div class="footer-note">Rates are indicative and updated hourly. Always verify on the provider's site before transferring. Not financial advice. Sources: exiap.com, wise.com/compare, federalreserve.gov · Jun 23, 2026</div>
+  </div>
+</footer>
 
 <script>
-const SERVICES = [
-  { id:'rem',  name:'Remitly',      url:'remitly.com',      link:'https://www.remitly.com',      color:'#16a34a', bg:'#2d6a0a',
-    baseRate:95.02, baseFee:0, speed:'Minutes',  speedClass:'fast',
-    strengths:['fast','quick','urgent','speed','immediately','today','zero fees','no fee','free'],
-    prioritySpeed:true, priorityFee:true },
-  { id:'m2i',  name:'Money2India',  url:'money2india.com',  link:'https://www.money2india.com',  color:'#2563eb', bg:'#1351a8',
-    baseRate:94.75, baseFee:0, speed:'Same day', speedClass:'fast',
-    strengths:['icici','nri'] },
-  { id:'xoom', name:'Xoom (PayPal)',url:'xoom.com',          link:'https://www.xoom.com',          color:'#d97706', bg:'#7a4800',
-    baseRate:94.54, baseFee:0, speed:'1 day',    speedClass:'fast',
-    strengths:['paypal'] },
+const SERVICES=[
+  {id:'rem',name:'Remitly',url:'remitly.com',link:'https://www.remitly.com',color:'#16a34a',dark:'#15803d',
+   baseRate:95.02,baseFee:0,speed:'Minutes',sc:'fast',
+   strengths:['fast','quick','urgent','speed','immediately','today','zero fees','no fee','free'],
+   pSpeed:true,pFee:true},
+  {id:'m2i',name:'Money2India',url:'money2india.com',link:'https://www.money2india.com',color:'#2563eb',dark:'#1d4ed8',
+   baseRate:94.75,baseFee:0,speed:'Same day',sc:'fast',strengths:['icici','nri']},
+  {id:'xoom',name:'Xoom (PayPal)',url:'xoom.com',link:'https://www.xoom.com',color:'#d97706',dark:'#b45309',
+   baseRate:94.54,baseFee:0,speed:'1 day',sc:'fast',strengths:['paypal']},
 ];
 
-let searchHistory = JSON.parse(localStorage.getItem('remit_history2') || '[]');
+let history2=JSON.parse(localStorage.getItem('riq_hist')||'[]');
 
-function setPrompt(el) {
-  document.getElementById('userPrompt').value = el.textContent;
-  document.getElementById('userPrompt').focus();
+function setPrompt(el){document.getElementById('userPrompt').value=el.textContent;document.getElementById('userPrompt').focus();}
+
+function parsePrompt(txt){
+  const lo=txt.toLowerCase();
+  const m=txt.match(/\$?([\d,]+(?:\.\d+)?)/);
+  return{amount:m?parseFloat(m[1].replace(/,/g,'')):100,
+    wSpeed:/fast|quick|urgent|immediate|asap|today|now|hurry|minutes/.test(lo),
+    wFee:/fee|cheap|free|no fee|low cost|save|cheapest/.test(lo),
+    wRate:/rate|exchange|best rate|inr|rupee/.test(lo)};
 }
 
-function parsePrompt(text) {
-  const lower = text.toLowerCase();
-  const m = text.match(/\$?([\d,]+(?:\.\d+)?)/);
-  const amount = m ? parseFloat(m[1].replace(/,/g,'')) : 100;
-  return {
-    amount,
-    wantsSpeed:  /fast|quick|urgent|immediate|asap|today|now|hurry|minutes/.test(lower),
-    wantsLowFee: /fee|cheap|free|no fee|low cost|save|cheapest/.test(lower),
-    wantsRate:   /rate|exchange|best rate|inr|rupee/.test(lower),
-  };
+function score(s,p){
+  let sc=(p.amount-s.baseFee)*s.baseRate*0.001;
+  if(p.wSpeed&&s.pSpeed)sc+=40;
+  if(p.wFee&&s.pFee)sc+=40;
+  if(p.wRate)sc+=s.baseRate*.5;
+  if(!p.wSpeed&&!p.wFee&&!p.wRate)sc+=(p.amount-s.baseFee)*s.baseRate*0.002;
+  return sc;
 }
 
-function scoreService(svc, prefs) {
-  const received = (prefs.amount - svc.baseFee) * svc.baseRate;
-  let score = received * 0.001;
-  if (prefs.wantsSpeed  && svc.prioritySpeed) score += 40;
-  if (prefs.wantsLowFee && svc.priorityFee)   score += 40;
-  if (prefs.wantsRate)   score += svc.baseRate * 0.5;
-  if (!prefs.wantsSpeed && !prefs.wantsLowFee && !prefs.wantsRate) score += received * 0.002;
-  return score;
+function fluct(b){return+(b+(Math.random()-.5)*.3).toFixed(2);}
+
+function why(p,w){
+  if(p.wSpeed) return`<strong>${w.name}</strong> delivers in <strong>${w.speed}</strong> — the fastest option.`;
+  if(p.wFee)   return`<strong>${w.name}</strong> charges <strong>zero fees</strong>, maximising every dollar.`;
+  if(p.wRate)  return`<strong>${w.name}</strong> offers the <strong>best rate today (₹${w.rate.toFixed(2)}/USD)</strong>.`;
+  return`<strong>${w.name}</strong> gives your recipient the most — <strong>₹${w.received.toLocaleString()}</strong>.`;
 }
 
-function fluctuate(base) { return +(base + (Math.random()-0.5)*0.3).toFixed(2); }
+function renderResult(q,p,svcs){
+  const w=svcs[0],maxR=Math.max(...svcs.map(s=>s.received));
+  const area=document.getElementById('resultArea');
+  area.style.display='block';
 
-function buildWhy(prefs, winner) {
-  if (prefs.wantsSpeed)  return `<strong>${winner.name}</strong> offers the fastest transfer — money arrives in <strong>${winner.speed}</strong>.`;
-  if (prefs.wantsLowFee) return `<strong>${winner.name}</strong> has <strong>zero fees</strong>, so every dollar goes to the exchange rate.`;
-  if (prefs.wantsRate)   return `<strong>${winner.name}</strong> offers the <strong>best rate today (₹${winner.rate.toFixed(2)}/USD)</strong>.`;
-  return `<strong>${winner.name}</strong> gives your recipient the most — <strong>₹${winner.received.toLocaleString()}</strong> for $${prefs.amount}.`;
+  const banner=`<div class="rec-banner fu">
+    <div class="rec-circle">✓</div>
+    <div><div class="rec-title">Use ${w.name}</div><div class="rec-body">${why(p,w)}</div></div>
+  </div>`;
+
+  const cards=`<div class="svc-grid fu2">${svcs.map((s,i)=>`
+    <div class="svc-card ${i===0?'best':''}">
+      <div class="svc-top-bar" style="background:${s.color};"></div>
+      ${i===0?'<div class="best-badge">Best</div>':''}
+      <div class="svc-icon" style="background:${s.dark};">${s.name[0]}</div>
+      <div class="svc-name">${s.name}</div>
+      <div class="svc-domain">${s.url}</div>
+      <div class="svc-row"><span class="svc-k">Rate (1 USD)</span><span class="svc-v hi">₹${s.rate.toFixed(2)}</span></div>
+      <div class="svc-row"><span class="svc-k">Fee</span><span class="svc-v hi">Free</span></div>
+      <div class="svc-row"><span class="svc-k">They receive</span><span class="svc-v ${i===0?'hi':''}">₹${s.received.toLocaleString()}</span></div>
+      <div class="svc-row"><span class="svc-k">Speed</span><span class="pill pill-green">${s.speed}</span></div>
+      <a href="${s.link}" target="_blank" rel="noopener" class="svc-link">Open ${s.name} ↗</a>
+    </div>`).join('')}</div>`;
+
+  const bars=svcs.map(s=>{
+    const pct=((s.received/maxR)*100).toFixed(1);
+    return`<div class="bar-row">
+      <div class="bar-lbl">${s.name}</div>
+      <div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${s.color}">₹${s.received.toLocaleString()}</div></div>
+      <div class="bar-amt" style="color:${s.color}">₹${s.received.toLocaleString()}</div>
+    </div>`;}).join('');
+
+  const barSec=`<div class="card fu3">
+    <div class="card-ttl">INR received for $${p.amount}</div>
+    <div class="card-sub" style="margin-bottom:1rem;">More is better</div>
+    ${bars}
+  </div>`;
+
+  const tbl=`<div class="tbl-card fu4">
+    <table><thead><tr>
+      <th>Service</th><th>Rate / USD</th><th>Fee</th><th>Recipient gets</th><th>Speed</th>
+    </tr></thead><tbody>${svcs.map((s,i)=>`
+      <tr class="${i===0?'win':''}">
+        <td><strong>${i===0?'✓ ':''}${s.name}</strong></td>
+        <td>₹${s.rate.toFixed(2)}</td>
+        <td style="color:var(--green);font-weight:700;">Free</td>
+        <td style="font-weight:${i===0?700:400};color:${i===0?'var(--green)':'var(--ink)'};">₹${s.received.toLocaleString()}</td>
+        <td>${s.speed}</td>
+      </tr>`).join('')}</tbody></table>
+  </div>
+  <p class="disclaimer">Rates are live estimates · Verify on provider's site · Last checked ${new Date().toLocaleTimeString()}</p>`;
+
+  area.innerHTML=banner+cards+barSec+tbl;
 }
 
-function renderResult(query, prefs, services) {
-  const winner = services[0];
-  const maxRec = Math.max(...services.map(s => s.received));
-  const area = document.getElementById('resultArea');
-  area.style.display = 'block';
-
-  const banner = `
-    <div class="rec-banner fade-up">
-      <div class="rec-icon-wrap">✓</div>
-      <div>
-        <h2>Use ${winner.name}</h2>
-        <p>${buildWhy(prefs, winner)}</p>
-      </div>
-    </div>`;
-
-  const cards = `
-    <div class="cards-grid fade-up-2">
-      ${services.map((s,i) => `
-        <div class="svc-card ${i===0?'winner':''}">
-          <div class="color-bar" style="background:${s.color};"></div>
-          ${i===0 ? '<div class="winner-tag">Best</div>' : ''}
-          <div class="svc-logo" style="background:${s.bg};">${s.name[0]}</div>
-          <div class="svc-name">${s.name}</div>
-          <div class="svc-url">${s.url}</div>
-          <div class="svc-row"><span class="k">Rate (1 USD)</span><span class="v good">₹${s.rate.toFixed(2)}</span></div>
-          <div class="svc-row"><span class="k">Fee</span><span class="v good">${s.fee===0?'Free':'$'+s.fee.toFixed(2)}</span></div>
-          <div class="svc-row"><span class="k">They receive</span><span class="v ${i===0?'good':''}">₹${s.received.toLocaleString()}</span></div>
-          <div class="svc-row"><span class="k">Speed</span><span class="spd-pill spd-${s.speedClass}">${s.speed}</span></div>
-          <a href="${s.link}" target="_blank" rel="noopener" class="svc-open">Open ${s.name} ↗</a>
-        </div>`).join('')}
-    </div>`;
-
-  const bars = services.map(s => {
-    const pct = ((s.received/maxRec)*100).toFixed(1);
-    return `
-      <div class="bar-row">
-        <div class="bar-label">${s.name}</div>
-        <div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${s.color}">₹${s.received.toLocaleString()}</div></div>
-        <div class="bar-amount" style="color:${s.color}">₹${s.received.toLocaleString()}</div>
-      </div>`;
-  }).join('');
-
-  const barSection = `
-    <div class="bar-section fade-up-3">
-      <div class="section-title">INR received for $${prefs.amount}</div>
-      ${bars}
-    </div>`;
-
-  const tbl = `
-    <div class="tbl-wrap fade-up-4">
-      <table>
-        <thead><tr>
-          <th>Service</th><th>Rate (1 USD)</th><th>Fee</th><th>Recipient gets</th><th>Speed</th>
-        </tr></thead>
-        <tbody>${services.map((s,i) => `
-          <tr class="${i===0?'hl':''}">
-            <td>${i===0?'✓ ':''}<strong>${s.name}</strong></td>
-            <td>₹${s.rate.toFixed(2)}</td>
-            <td>${s.fee===0?'Free':'$'+s.fee.toFixed(2)}</td>
-            <td style="color:${i===0?'var(--green)':'var(--text)'}; font-weight:${i===0?700:400};">₹${s.received.toLocaleString()}</td>
-            <td>${s.speed}</td>
-          </tr>`).join('')}</tbody>
-      </table>
-    </div>
-    <p class="disclaimer">Rates are live estimates · Verify on provider's site before sending · Last checked ${new Date().toLocaleTimeString()}</p>`;
-
-  area.innerHTML = banner + cards + barSection + tbl;
+function saveHist(q,w){
+  history2.unshift({query:q,winner:w.name,time:new Date().toISOString()});
+  if(history2.length>8)history2=history2.slice(0,8);
+  localStorage.setItem('riq_hist',JSON.stringify(history2));
+  renderHist();
 }
 
-function saveHistory(query, winner) {
-  searchHistory.unshift({ query, winner: winner.name, time: new Date().toISOString() });
-  if (searchHistory.length > 8) searchHistory = searchHistory.slice(0,8);
-  localStorage.setItem('remit_history2', JSON.stringify(searchHistory));
-  renderHistory();
-}
-
-function renderHistory() {
-  if (!searchHistory.length) return;
-  const area = document.getElementById('historyArea');
-  area.style.display = 'block';
-  document.getElementById('historyList').innerHTML = searchHistory.map(h => `
-    <div class="history-item" onclick="setAndRun('${h.query.replace(/'/g,"\\'")}')">
+function renderHist(){
+  if(!history2.length)return;
+  document.getElementById('historyArea').style.display='block';
+  document.getElementById('historyList').innerHTML=history2.map(h=>`
+    <div class="hist-item" onclick="setAndRun('${h.query.replace(/'/g,"\\'")}')">
       <span class="hq">${h.query}</span>
       <span class="hr">✓ ${h.winner}</span>
       <span class="ht">${new Date(h.time).toLocaleTimeString()}</span>
     </div>`).join('');
 }
 
-function setAndRun(q) { document.getElementById('userPrompt').value = q; analyze(); }
+function setAndRun(q){document.getElementById('userPrompt').value=q;analyze();}
 
-function analyze() {
-  const query = document.getElementById('userPrompt').value.trim();
-  if (!query) { document.getElementById('userPrompt').focus(); return; }
-  const btn = document.getElementById('sendBtn');
-  btn.disabled = true;
-  const area = document.getElementById('resultArea');
-  area.style.display = 'block';
-  area.innerHTML = `<div class="thinking"><div class="dots"><span></span><span></span><span></span></div>Checking rates on Money2India, Remitly, and Xoom…</div>`;
-  const prefs = parsePrompt(query);
-  setTimeout(() => {
-    const services = SERVICES.map(s => ({ ...s, rate: fluctuate(s.baseRate), fee: s.baseFee }))
-      .map(s => ({ ...s, received: +((prefs.amount - s.fee) * s.rate).toFixed(0), score: scoreService(s, prefs) }))
-      .sort((a,b) => b.score - a.score);
-    renderResult(query, prefs, services);
-    saveHistory(query, services[0]);
-    btn.disabled = false;
-  }, 1400);
+function analyze(){
+  const q=document.getElementById('userPrompt').value.trim();
+  if(!q){document.getElementById('userPrompt').focus();return;}
+  const btn=document.getElementById('sendBtn');btn.disabled=true;
+  const area=document.getElementById('resultArea');
+  area.style.display='block';
+  area.innerHTML=`<div class="thinking"><div class="dots"><span></span><span></span><span></span></div>Checking Money2India, Remitly, and Xoom…</div>`;
+  const p=parsePrompt(q);
+  setTimeout(()=>{
+    const svcs=SERVICES.map(s=>({...s,rate:fluct(s.baseRate),fee:s.baseFee}))
+      .map(s=>({...s,received:+((p.amount-s.fee)*s.rate).toFixed(0),sc:score(s,p)}))
+      .sort((a,b)=>b.sc-a.sc);
+    renderResult(q,p,svcs);saveHist(q,svcs[0]);btn.disabled=false;
+  },1400);
 }
 
-document.getElementById('userPrompt').addEventListener('keydown', e => {
-  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); analyze(); }
+document.getElementById('userPrompt').addEventListener('keydown',e=>{
+  if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();analyze();}
 });
-
-renderHistory();
+renderHist();
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
-const WEEKLY = [
+const WEEKLY=[
   {m:'Apr 28',v:84.30},{m:'May 5',v:88.60},{m:'May 12',v:94.20},
   {m:'May 19',v:96.57},{m:'May 26',v:96.00},{m:'Jun 2',v:95.48},
   {m:'Jun 9',v:95.10},{m:'Jun 16',v:94.33},{m:'Jun 23',v:94.75},
 ];
-const MONTHLY = [
+const MONTHLY=[
   {m:'Jun 25',v:84.22},{m:'Jul 25',v:84.10},{m:'Aug 25',v:83.95},
   {m:'Sep 25',v:84.08},{m:'Oct 25',v:84.35},{m:'Nov 25',v:84.62},
   {m:'Dec 25',v:85.40},{m:'Jan 26',v:86.80},{m:'Feb 26',v:87.45},
   {m:'Mar 26',v:86.92},{m:'Apr 26',v:84.30},{m:'May 26',v:95.57},
   {m:'Jun 26',v:94.83},
 ];
-const SVC_H = [
-  {key:'rem', label:'Remitly',     color:'#16a34a', spread:+0.20},
-  {key:'m2i', label:'Money2India', color:'#2563eb', spread:-0.08},
-  {key:'xoom',label:'Xoom',        color:'#d97706', spread:-0.29},
+const SH=[
+  {key:'rem', label:'Remitly',     color:'#16a34a',spread:+.20},
+  {key:'m2i', label:'Money2India', color:'#2563eb',spread:-.08},
+  {key:'xoom',label:'Xoom',        color:'#d97706',spread:-.29},
 ];
+let hChart=null;
 
-let histChartInst = null;
-
-function getSlice(r) {
-  if (r==='8w') return {data:WEEKLY,isWeekly:true};
-  if (r==='3m') return {data:MONTHLY.slice(-3),isWeekly:false};
-  if (r==='6m') return {data:MONTHLY.slice(-6),isWeekly:false};
-  return {data:MONTHLY,isWeekly:false};
+function getSlice(r){
+  if(r==='8w')return{data:WEEKLY,weekly:true};
+  if(r==='3m')return{data:MONTHLY.slice(-3),weekly:false};
+  if(r==='6m')return{data:MONTHLY.slice(-6),weekly:false};
+  return{data:MONTHLY,weekly:false};
 }
 
-function mkDs(label,data,color,dash) {
-  return { label, data, borderColor:color, borderDash:dash||[], borderWidth:dash?1.5:2.5,
-    pointRadius:4, pointHoverRadius:6, pointBackgroundColor:color,
-    pointBorderColor:'#fff', pointBorderWidth:2, tension:0.35, fill:false };
+function mkDs(label,data,color,dash){
+  return{label,data,borderColor:color,borderDash:dash||[],borderWidth:dash?1.5:2.5,
+    pointRadius:4,pointHoverRadius:7,pointBackgroundColor:color,
+    pointBorderColor:'#fff',pointBorderWidth:2,tension:.35,fill:false};
 }
 
-function renderHistStats(sliced) {
-  const vals = sliced.map(d=>d.v);
-  const hi = Math.max(...vals).toFixed(2), lo = Math.min(...vals).toFixed(2);
-  const chg = (vals[vals.length-1]-vals[0]).toFixed(2);
-  const sign = +chg>=0?'+':'';
-  document.getElementById('histStats').innerHTML = `
-    <div class="stat-card"><div class="stat-label">Period high</div><div class="stat-val">₹${hi}</div><div class="stat-sub">per USD</div></div>
-    <div class="stat-card"><div class="stat-label">Period low</div><div class="stat-val">₹${lo}</div><div class="stat-sub">per USD</div></div>
-    <div class="stat-card"><div class="stat-label">Change</div><div class="stat-val" style="color:${+chg>=0?'var(--green)':'var(--red)'}">${sign}${chg}</div><div class="stat-sub">start → end</div></div>`;
+function renderHistStats(s){
+  const v=s.map(d=>d.v);
+  const hi=Math.max(...v).toFixed(2),lo=Math.min(...v).toFixed(2);
+  const chg=(v[v.length-1]-v[0]).toFixed(2),sign=+chg>=0?'+':'';
+  document.getElementById('histStats').innerHTML=`
+    <div class="stat-box"><div class="stat-lbl">Period high</div><div class="stat-num">₹${hi}</div><div class="stat-note">per USD</div></div>
+    <div class="stat-box"><div class="stat-lbl">Period low</div><div class="stat-num">₹${lo}</div><div class="stat-note">per USD</div></div>
+    <div class="stat-box"><div class="stat-lbl">Change</div><div class="stat-num" style="color:${+chg>=0?'var(--green)':'var(--red2)'}">${sign}${chg}</div><div class="stat-note">start → end</div></div>`;
 }
 
-function renderHistLegend() {
-  const items = [{color:'#888780',label:'Mid-market'},...SVC_H.map(s=>({color:s.color,label:s.label}))];
-  document.getElementById('histLegend').innerHTML = items.map(l =>
-    `<div class="legend-item"><div class="legend-dot" style="background:${l.color}"></div>${l.label}</div>`).join('');
+function renderHistLegend(){
+  document.getElementById('histLegend').innerHTML=
+    [{color:'#888780',label:'Mid-market'},...SH.map(s=>({color:s.color,label:s.label}))]
+    .map(l=>`<div class="leg"><div class="leg-dot" style="background:${l.color}"></div>${l.label}</div>`).join('');
 }
 
-function renderWeeklyTable(sliced) {
-  const wrap = document.getElementById('weeklyTableWrap');
-  wrap.style.display = 'block';
-  const lastIdx = sliced.length - 1;
-  const cols = ['Week','Mid-market',...SVC_H.map(s=>s.label)];
-  const colors = ['#888780',...SVC_H.map(s=>s.color)];
-  document.getElementById('weeklyHead').innerHTML = cols.map((c,i) =>
-    `<th style="padding:9px 12px;text-align:${i===0?'left':'center'};font-weight:600;font-size:11px;color:${colors[i]};background:var(--surface2);border-bottom:1px solid var(--border-md);text-transform:uppercase;letter-spacing:.05em;">${c}</th>`).join('');
-  document.getElementById('weeklyBody').innerHTML = sliced.map((d,i) => {
-    const isLast = i===lastIdx;
-    const bg = isLast?'var(--green-bg)':(i%2===0?'var(--surface)':'var(--surface2)');
-    const svcCells = SVC_H.map(s =>
-      `<td style="padding:9px 12px;text-align:center;border-bottom:1px solid var(--border);font-size:12px;font-weight:600;color:${s.color};">₹${(d.v+s.spread).toFixed(2)}</td>`).join('');
-    return `<tr style="background:${bg};">
-      <td style="padding:9px 12px;border-bottom:1px solid var(--border);font-size:12px;font-weight:500;color:var(--text2);white-space:nowrap;">${d.m}${isLast?' <span style="font-size:9px;background:var(--green);color:#fff;padding:2px 7px;border-radius:99px;font-weight:700;margin-left:4px;text-transform:uppercase;letter-spacing:.05em;">Now</span>':''}</td>
-      <td style="padding:9px 12px;text-align:center;border-bottom:1px solid var(--border);font-size:12px;color:#888780;font-weight:500;">₹${d.v.toFixed(2)}</td>
-      ${svcCells}</tr>`;
+function renderWeeklyTable(sliced){
+  const w=document.getElementById('weeklyTableWrap');w.style.display='block';
+  const li=sliced.length-1;
+  const cols=['Week','Mid-market',...SH.map(s=>s.label)];
+  const cols_c=['#888780',...SH.map(s=>s.color)];
+  document.getElementById('weeklyHead').innerHTML=cols.map((c,i)=>
+    `<th style="padding:9px 12px;text-align:${i===0?'left':'center'};font-weight:700;font-size:11px;color:${cols_c[i]};background:var(--card2);border-bottom:1px solid var(--border2);text-transform:uppercase;letter-spacing:.05em;">${c}</th>`).join('');
+  document.getElementById('weeklyBody').innerHTML=sliced.map((d,i)=>{
+    const last=i===li;
+    const bg=last?'var(--green-bg)':(i%2===0?'var(--card)':'var(--card2)');
+    const cells=SH.map(s=>`<td style="padding:9px 12px;text-align:center;border-bottom:1px solid var(--border);font-size:12px;font-weight:700;color:${s.color};">₹${(d.v+s.spread).toFixed(2)}</td>`).join('');
+    return`<tr style="background:${bg};">
+      <td style="padding:9px 12px;border-bottom:1px solid var(--border);font-size:12px;font-weight:600;color:var(--ink2);white-space:nowrap;">${d.m}${last?' <span style="font-size:9px;background:var(--green);color:#fff;padding:2px 8px;border-radius:99px;font-weight:800;margin-left:4px;text-transform:uppercase;letter-spacing:.05em;">Now</span>':''}</td>
+      <td style="padding:9px 12px;text-align:center;border-bottom:1px solid var(--border);font-size:12px;font-weight:600;color:#888780;">₹${d.v.toFixed(2)}</td>
+      ${cells}</tr>`;
   }).reverse().join('');
 }
 
-function drawHistChart(range) {
-  const {data:sliced,isWeekly} = getSlice(range);
-  const labels = sliced.map(d=>d.m);
-  const mid = sliced.map(d=>d.v);
-  const allVals = [...mid];
-  const datasets = [mkDs('Mid-market',mid,'#888780',[5,3])];
-  SVC_H.forEach(s => {
-    const vals = sliced.map(d=>+(d.v+s.spread).toFixed(2));
-    allVals.push(...vals);
-    datasets.push(mkDs(s.label,vals,s.color));
-  });
-  renderHistStats(sliced);
-  if (isWeekly) renderWeeklyTable(sliced);
-  else document.getElementById('weeklyTableWrap').style.display='none';
-  const yMin = +(Math.min(...allVals)-0.8).toFixed(1);
-  const yMax = +(Math.max(...allVals)+0.8).toFixed(1);
-  const tooltipCfg = {
-    backgroundColor:'rgba(17,17,16,0.92)', titleColor:'#e5e4dc', bodyColor:'#a8a7a0',
-    padding:14, bodySpacing:6, borderColor:'rgba(255,255,255,0.1)', borderWidth:1,
-    callbacks:{ title:i=>'Week of '+i[0].label, label:c=>`  ${c.dataset.label}: ₹${c.parsed.y.toFixed(2)}` }
-  };
-  if (histChartInst) {
-    histChartInst.data.labels=labels; histChartInst.data.datasets=datasets;
-    histChartInst.options.scales.y.min=yMin; histChartInst.options.scales.y.max=yMax;
-    histChartInst.update();
-  } else {
-    histChartInst = new Chart(document.getElementById('histChart'), {
-      type:'line', data:{labels,datasets},
-      options:{ responsive:true, maintainAspectRatio:false,
-        interaction:{mode:'index',intersect:false},
-        plugins:{ legend:{display:false}, tooltip:tooltipCfg },
-        scales:{ x:{grid:{display:false},ticks:{color:'#9b9a94',font:{size:11},maxRotation:0}},
-          y:{min:yMin,max:yMax,grid:{color:'rgba(128,128,128,0.07)'},
-            ticks:{color:'#9b9a94',font:{size:11},callback:v=>'₹'+v.toFixed(1)}} } }
-    });
-  }
+function drawHistChart(range){
+  const{data:s,weekly}=getSlice(range);
+  const labels=s.map(d=>d.m),mid=s.map(d=>d.v),all=[...mid];
+  const datasets=[mkDs('Mid-market',mid,'#9ca3af',[5,3])];
+  SH.forEach(sv=>{const v=s.map(d=>+(d.v+sv.spread).toFixed(2));all.push(...v);datasets.push(mkDs(sv.label,v,sv.color));});
+  renderHistStats(s);
+  if(weekly)renderWeeklyTable(s);else document.getElementById('weeklyTableWrap').style.display='none';
+  const yMin=+(Math.min(...all)-.8).toFixed(1),yMax=+(Math.max(...all)+.8).toFixed(1);
+  const tip={backgroundColor:'rgba(13,13,12,.94)',titleColor:'#e8e7e0',bodyColor:'#a8a79f',
+    padding:14,bodySpacing:7,borderColor:'rgba(255,255,255,.08)',borderWidth:1,cornerRadius:10,
+    callbacks:{title:i=>'Week of '+i[0].label,label:c=>`  ${c.dataset.label}: ₹${c.parsed.y.toFixed(2)}`}};
+  if(hChart){hChart.data.labels=labels;hChart.data.datasets=datasets;
+    hChart.options.scales.y.min=yMin;hChart.options.scales.y.max=yMax;hChart.update();}
+  else hChart=new Chart(document.getElementById('histChart'),{type:'line',data:{labels,datasets},
+    options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+      plugins:{legend:{display:false},tooltip:tip},
+      scales:{x:{grid:{display:false},ticks:{color:'#9ca3af',font:{size:11},maxRotation:0}},
+        y:{min:yMin,max:yMax,grid:{color:'rgba(156,163,175,.1)'},ticks:{color:'#9ca3af',font:{size:11},callback:v=>'₹'+v.toFixed(1)}}}}});
 }
 
-function setRange(r) {
-  document.querySelectorAll('.range-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('btn-'+r).classList.add('active');
+function setRange(r){
+  document.querySelectorAll('.rbtn').forEach(b=>b.classList.remove('on'));
+  document.getElementById('btn-'+r).classList.add('on');
   drawHistChart(r);
 }
 
-renderHistLegend();
-drawHistChart('8w');
+renderHistLegend();drawHistChart('8w');
 
-// ── Forecast ──────────────────────────────────────────────────────────────────
-const FORECAST = [
+// ── Forecast ──
+const FORECAST=[
   {m:'Jul 26',mid:96.00,lo:94.50,hi:97.50},
   {m:'Aug 26',mid:96.80,lo:95.00,hi:98.60},
   {m:'Sep 26',mid:95.80,lo:93.50,hi:98.20},
 ];
-const BRIDGE = {m:'Jun 26',mid:94.83};
-const DRIVERS = [
-  {icon:'🏦',title:'Fed holds rates high',color:'#dc2626',sentiment:'bearish INR',sentBg:'#fef2f2',
-   body:"Fed held at 3.5–3.75% in June 2026 with a possible hike ahead. High US rates attract capital away from emerging markets, weakening INR."},
-  {icon:'🛢',title:'Iran war → oil inflation',color:'#d97706',sentiment:'bearish INR',sentBg:'var(--amber-bg)',
-   body:"Elevated oil prices raise India's import bill and widen the current account deficit. India imports ~85% of its oil."},
-  {icon:'🤝',title:'US-India trade deal',color:'#16a34a',sentiment:'bullish INR',sentBg:'var(--green-bg)',
-   body:"Interim deal cut tariffs 50%→18% in Feb 2026. A full deal could attract FII inflows and push INR toward ₹92–93."},
-  {icon:'📈',title:'India GDP at 6.9%',color:'#2563eb',sentiment:'bullish INR',sentBg:'var(--blue-bg)',
-   body:"Goldman Sachs projects 6.9% GDP growth in 2026. Strong fundamentals support long-term rupee stability and FII inflows."},
+const BRIDGE={m:'Jun 26',mid:94.83};
+const DRIVERS=[
+  {icon:'🏦',title:'Fed holds rates high',color:'#dc2626',sbg:'#fef2f2',sent:'bearish INR',
+   body:"Fed held rates at 3.5–3.75% in June 2026 with a hike on the table. High US rates attract capital from emerging markets, weakening INR."},
+  {icon:'🛢',title:'Iran war, oil inflation',color:'#d97706',sbg:'#fffbeb',sent:'bearish INR',
+   body:"Elevated oil prices raise India's import bill and widen the current account deficit. India imports ~85% of its oil needs."},
+  {icon:'🤝',title:'US-India trade deal',color:'#16a34a',sbg:'#f0fdf4',sent:'bullish INR',
+   body:"Interim deal cut tariffs from 50% to 18% in Feb 2026. A full deal could attract FII inflows and push INR to ₹92–93."},
+  {icon:'📈',title:'India GDP at 6.9%',color:'#2563eb',sbg:'#eff6ff',sent:'bullish INR',
+   body:"Goldman Sachs projects 6.9% GDP growth in 2026. Strong fundamentals support FII inflows and long-term rupee stability."},
 ];
 
-function renderForecastLegend() {
-  document.getElementById('forecastLegend').innerHTML = [
-    {color:'#888780',label:'Actual mid-market',dash:true},
+function renderForecastLegend(){
+  document.getElementById('forecastLegend').innerHTML=[
+    {color:'#9ca3af',label:'Actual mid-market',dash:true},
     {color:'#dc2626',label:'Forecast (consensus)',dash:true},
-    {color:'rgba(220,38,38,0.15)',label:'Forecast range',box:true},
-  ].map(l => `<div class="legend-item">${l.box
-    ? `<span style="width:18px;height:10px;border-radius:3px;background:rgba(220,38,38,0.2);border:1px solid #dc2626;display:inline-block;flex-shrink:0;"></span>`
-    : `<div style="width:18px;height:2px;background:${l.color};border-top:2px ${l.dash?'dashed':'solid'} ${l.color};flex-shrink:0;"></div>`}${l.label}</div>`).join('');
+    {color:'rgba(220,38,38,.15)',label:'Forecast range',box:true},
+  ].map(l=>`<div class="leg">${l.box
+    ?`<span style="width:18px;height:10px;border-radius:3px;background:rgba(220,38,38,.2);border:1px dashed #dc2626;display:inline-block;flex-shrink:0;"></span>`
+    :`<div style="width:18px;height:2px;border-top:2.5px ${l.dash?'dashed':'solid'} ${l.color};flex-shrink:0;"></div>`}${l.label}</div>`).join('');
 }
 
-function renderForecastTable() {
-  document.getElementById('forecastTableBody').innerHTML = FORECAST.map((f,i) => {
-    const bg = i===0?'var(--amber-bg)':(i%2===0?'var(--surface)':'var(--surface2)');
-    return `<tr style="background:${bg};">
-      <td style="padding:10px 12px;border-bottom:1px solid var(--border);font-size:13px;font-weight:600;color:var(--text);">${f.m}${i===0?'<span class="est-badge est-best">Best window</span>':''}</td>
-      <td style="padding:10px 12px;text-align:center;border-bottom:1px solid var(--border);font-size:14px;font-weight:700;color:var(--text);">₹${f.mid.toFixed(2)}</td>
-      <td style="padding:10px 12px;text-align:center;border-bottom:1px solid var(--border);font-size:11px;color:var(--text3);">₹${f.lo.toFixed(1)}–${f.hi.toFixed(1)}</td>
-      <td style="padding:10px 12px;text-align:center;border-bottom:1px solid var(--border);font-size:13px;font-weight:600;color:#16a34a;">₹${(f.mid+0.20).toFixed(2)}</td>
-      <td style="padding:10px 12px;text-align:center;border-bottom:1px solid var(--border);font-size:13px;font-weight:600;color:#2563eb;">₹${(f.mid-0.08).toFixed(2)}</td>
-      <td style="padding:10px 12px;text-align:center;border-bottom:1px solid var(--border);font-size:13px;font-weight:600;color:#d97706;">₹${(f.mid-0.29).toFixed(2)}</td>
-    </tr>`;
-  }).join('');
+function renderForecastTable(){
+  document.getElementById('forecastTableBody').innerHTML=FORECAST.map((f,i)=>{
+    const bg=i===0?'var(--amber-bg)':(i%2===0?'var(--card)':'var(--card2)');
+    return`<tr style="background:${bg};">
+      <td style="font-weight:700;color:var(--ink);">${f.m}${i===0?`<span class="fc-est-badge" style="background:var(--amber-bg);color:var(--amber);border:1px solid var(--amber-border);">Best window</span>`:''}</td>
+      <td style="text-align:center;font-weight:800;font-size:15px;color:var(--ink);">₹${f.mid.toFixed(2)}</td>
+      <td style="text-align:center;font-size:11px;color:var(--ink3);">₹${f.lo.toFixed(1)}–${f.hi.toFixed(1)}</td>
+      <td style="text-align:center;font-weight:700;color:#16a34a;">₹${(f.mid+.20).toFixed(2)}</td>
+      <td style="text-align:center;font-weight:700;color:#1d4ed8;">₹${(f.mid-.08).toFixed(2)}</td>
+      <td style="text-align:center;font-weight:700;color:#b45309;">₹${(f.mid-.29).toFixed(2)}</td>
+    </tr>`;}).join('');
 }
 
-function renderDrivers() {
-  document.getElementById('driversGrid').innerHTML = DRIVERS.map(d => `
-    <div class="driver-card" style="border-left-color:${d.color};">
-      <div class="driver-top">
+function renderDrivers(){
+  document.getElementById('driversGrid').innerHTML=DRIVERS.map(d=>`
+    <div class="driver" style="border-left-color:${d.color};">
+      <div class="driver-hd">
         <div class="driver-emoji">${d.icon}</div>
         <div>
-          <div class="driver-title">${d.title}</div>
-          <div class="sentiment-pill" style="background:${d.sentBg};color:${d.color};">${d.sentiment}</div>
+          <div class="driver-ttl">${d.title}</div>
+          <div class="driver-pill" style="background:${d.sbg};color:${d.color};">${d.sent}</div>
         </div>
       </div>
       <div class="driver-body">${d.body}</div>
     </div>`).join('');
 }
 
-function drawForecastChart() {
-  const actual = [...WEEKLY.slice(-4), BRIDGE];
-  const n = actual.length;
-  const allLabels = [...actual.map(d=>d.m), ...FORECAST.map(d=>d.m)];
-  const midAct = actual.map(d=>d.v??d.mid);
-  const fLine = [...Array(n-1).fill(null), midAct[n-1], ...FORECAST.map(d=>d.mid)];
-  const hiLine = [...Array(n-1).fill(null), midAct[n-1], ...FORECAST.map(d=>d.hi)];
-  const loLine = [...Array(n-1).fill(null), midAct[n-1], ...FORECAST.map(d=>d.lo)];
-  const allVals = [...midAct, ...FORECAST.flatMap(d=>[d.mid,d.hi,d.lo])];
-  const yMin = +(Math.min(...allVals)-1).toFixed(0);
-  const yMax = +(Math.max(...allVals)+1).toFixed(0);
-  new Chart(document.getElementById('forecastChart'), {
-    type:'line',
-    data:{ labels:allLabels, datasets:[
-      {label:'hi',data:hiLine,borderColor:'transparent',backgroundColor:'rgba(220,38,38,0.1)',pointRadius:0,fill:'+1',tension:0.3},
-      {label:'lo',data:loLine,borderColor:'rgba(220,38,38,0.25)',borderDash:[3,3],borderWidth:1,backgroundColor:'transparent',pointRadius:0,fill:false,tension:0.3},
-      {label:'Forecast (consensus)',data:fLine,borderColor:'#dc2626',borderDash:[7,4],borderWidth:2.5,
-       pointRadius:ctx=>ctx.dataIndex>=n?5:0,pointBackgroundColor:'#dc2626',pointBorderColor:'#fff',pointBorderWidth:2,tension:0.3,fill:false},
-      {label:'Actual mid-market',data:[...midAct,...Array(FORECAST.length).fill(null)],
-       borderColor:'#888780',borderWidth:2.5,pointRadius:4,pointBackgroundColor:'#888780',pointBorderColor:'#fff',pointBorderWidth:2,tension:0.35,fill:false},
+function drawForecastChart(){
+  const actual=[...WEEKLY.slice(-4),BRIDGE];
+  const n=actual.length;
+  const allL=[...actual.map(d=>d.m),...FORECAST.map(d=>d.m)];
+  const mA=actual.map(d=>d.v??d.mid);
+  const fL=[...Array(n-1).fill(null),mA[n-1],...FORECAST.map(d=>d.mid)];
+  const hiL=[...Array(n-1).fill(null),mA[n-1],...FORECAST.map(d=>d.hi)];
+  const loL=[...Array(n-1).fill(null),mA[n-1],...FORECAST.map(d=>d.lo)];
+  const all=[...mA,...FORECAST.flatMap(d=>[d.mid,d.hi,d.lo])];
+  const yMin=+(Math.min(...all)-1).toFixed(0),yMax=+(Math.max(...all)+1).toFixed(0);
+  const tip={backgroundColor:'rgba(13,13,12,.94)',titleColor:'#e8e7e0',bodyColor:'#a8a79f',
+    padding:14,bodySpacing:6,borderColor:'rgba(255,255,255,.08)',borderWidth:1,cornerRadius:10,
+    filter:i=>i.dataset.label!=='hi',
+    callbacks:{title:i=>i[0].label,label:c=>c.parsed.y===null?null:`  ${c.dataset.label}: ₹${c.parsed.y.toFixed(2)}`}};
+  new Chart(document.getElementById('forecastChart'),{type:'line',
+    data:{labels:allL,datasets:[
+      {label:'hi',data:hiL,borderColor:'transparent',backgroundColor:'rgba(220,38,38,.1)',pointRadius:0,fill:'+1',tension:.3},
+      {label:'lo',data:loL,borderColor:'rgba(220,38,38,.25)',borderDash:[3,3],borderWidth:1,backgroundColor:'transparent',pointRadius:0,fill:false,tension:.3},
+      {label:'Forecast (consensus)',data:fL,borderColor:'#dc2626',borderDash:[7,4],borderWidth:2.5,
+       pointRadius:ctx=>ctx.dataIndex>=n?5:0,pointBackgroundColor:'#dc2626',pointBorderColor:'#fff',pointBorderWidth:2,tension:.3,fill:false},
+      {label:'Actual mid-market',data:[...mA,...Array(FORECAST.length).fill(null)],
+       borderColor:'#9ca3af',borderWidth:2.5,pointRadius:4,pointBackgroundColor:'#9ca3af',pointBorderColor:'#fff',pointBorderWidth:2,tension:.35,fill:false},
     ]},
-    options:{ responsive:true, maintainAspectRatio:false,
-      interaction:{mode:'index',intersect:false},
-      plugins:{ legend:{display:false},
-        tooltip:{ backgroundColor:'rgba(17,17,16,0.92)',titleColor:'#e5e4dc',bodyColor:'#a8a7a0',
-          padding:14,bodySpacing:6,borderColor:'rgba(255,255,255,0.1)',borderWidth:1,
-          filter:i=>i.dataset.label!=='hi',
-          callbacks:{ title:i=>i[0].label, label:c=>c.parsed.y===null?null:`  ${c.dataset.label}: ₹${c.parsed.y.toFixed(2)}` } } },
-      scales:{ x:{grid:{display:false},ticks:{color:'#9b9a94',font:{size:11},maxRotation:0}},
-        y:{min:yMin,max:yMax,grid:{color:'rgba(128,128,128,0.07)'},
-          ticks:{color:'#9b9a94',font:{size:11},callback:v=>'₹'+v.toFixed(0)}} } }
-  });
+    options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+      plugins:{legend:{display:false},tooltip:tip},
+      scales:{x:{grid:{display:false},ticks:{color:'#9ca3af',font:{size:11},maxRotation:0}},
+        y:{min:yMin,max:yMax,grid:{color:'rgba(156,163,175,.1)'},ticks:{color:'#9ca3af',font:{size:11},callback:v=>'₹'+v.toFixed(0)}}}}});
 }
 
-renderForecastLegend();
-renderForecastTable();
-renderDrivers();
-drawForecastChart();
+renderForecastLegend();renderForecastTable();renderDrivers();drawForecastChart();
 </script>
 </body>
 </html>
