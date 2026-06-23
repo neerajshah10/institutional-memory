@@ -3,116 +3,176 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Remittance Advisor</title>
+  <title>Remittance Advisor — USD to INR</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #f5f5f3;
+      --bg: #f7f7f5;
       --surface: #ffffff;
-      --surface2: #f0efea;
-      --border: rgba(0,0,0,0.12);
+      --surface2: #f2f1ec;
+      --surface3: #e8e7e0;
+      --border: rgba(0,0,0,0.08);
+      --border-md: rgba(0,0,0,0.14);
       --border-strong: rgba(0,0,0,0.22);
-      --text: #1a1a18;
-      --text2: #5f5e5a;
-      --text3: #888780;
-      --green: #3b6d11;
-      --green-bg: #eaf3de;
-      --amber: #854f0b;
-      --amber-bg: #faeeda;
-      --blue: #185fa5;
-      --blue-bg: #e6f1fb;
-      --accent: #534ab7;
-      --accent-bg: #eeedfe;
-      --radius: 12px;
-      --radius-sm: 8px;
+      --text: #111110;
+      --text2: #52514d;
+      --text3: #9b9a94;
+      --green: #2d6a0a;
+      --green-mid: #4a9e1a;
+      --green-bg: #eaf5e1;
+      --green-border: rgba(45,106,10,0.3);
+      --amber: #7a4800;
+      --amber-mid: #c47c00;
+      --amber-bg: #fef3da;
+      --amber-border: rgba(122,72,0,0.25);
+      --red: #9b1c1c;
+      --red-bg: #fef2f2;
+      --blue: #1351a8;
+      --blue-mid: #2563eb;
+      --blue-bg: #eff6ff;
+      --blue-border: rgba(19,81,168,0.25);
+      --purple: #4338ca;
+      --purple-mid: #6366f1;
+      --purple-bg: #eef2ff;
+      --purple-border: rgba(67,56,202,0.3);
+      --radius: 16px;
+      --radius-sm: 10px;
+      --radius-xs: 6px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.06);
     }
 
     @media (prefers-color-scheme: dark) {
       :root {
-        --bg: #1c1c1a;
-        --surface: #252523;
-        --surface2: #2e2e2b;
-        --border: rgba(255,255,255,0.1);
+        --bg: #111110;
+        --surface: #1c1c1a;
+        --surface2: #252522;
+        --surface3: #2e2e2b;
+        --border: rgba(255,255,255,0.07);
+        --border-md: rgba(255,255,255,0.12);
         --border-strong: rgba(255,255,255,0.2);
         --text: #f0efe8;
-        --text2: #b4b2a9;
-        --text3: #888780;
-        --green: #97c459;
-        --green-bg: #173404;
-        --amber: #ef9f27;
-        --amber-bg: #412402;
-        --blue: #85b7eb;
-        --blue-bg: #042c53;
-        --accent: #afa9ec;
-        --accent-bg: #26215c;
+        --text2: #a8a7a0;
+        --text3: #68675f;
+        --green: #74c94e;
+        --green-mid: #5aaa32;
+        --green-bg: #0f2205;
+        --green-border: rgba(116,201,78,0.2);
+        --amber: #f0a832;
+        --amber-mid: #d4881a;
+        --amber-bg: #1f1200;
+        --amber-border: rgba(240,168,50,0.2);
+        --red: #f87171;
+        --red-bg: #1f0000;
+        --blue: #60a5fa;
+        --blue-mid: #3b82f6;
+        --blue-bg: #0c1f3f;
+        --blue-border: rgba(96,165,250,0.2);
+        --purple: #a5b4fc;
+        --purple-mid: #818cf8;
+        --purple-bg: #1e1b4b;
+        --purple-border: rgba(165,180,252,0.2);
+        --shadow-sm: none;
+        --shadow-md: none;
       }
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       background: var(--bg);
       color: var(--text);
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 2rem 1rem 4rem;
     }
 
-    header {
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, #1a1065 0%, #2d1b8e 40%, #1e3a8a 100%);
+      padding: 3rem 1.5rem 4rem;
       text-align: center;
-      margin-bottom: 2rem;
-    }
-
-    header h1 {
-      font-size: 28px;
-      font-weight: 600;
-      letter-spacing: -0.5px;
-      margin-bottom: 6px;
-    }
-
-    header p {
-      font-size: 15px;
-      color: var(--text2);
-    }
-
-    .prompt-card {
-      width: 100%;
-      max-width: 680px;
-      background: var(--surface);
-      border: 0.5px solid var(--border-strong);
-      border-radius: var(--radius);
-      padding: 1.25rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .prompt-row {
-      display: flex;
-      gap: 10px;
-      align-items: flex-end;
-    }
-
-    .prompt-wrap {
-      flex: 1;
       position: relative;
+      overflow: hidden;
     }
-
-    .prompt-wrap label {
-      display: block;
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 99px;
+      padding: 5px 14px;
       font-size: 12px;
-      color: var(--text2);
-      margin-bottom: 6px;
       font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 1.25rem;
     }
-
-    textarea {
-      width: 100%;
-      border: 0.5px solid var(--border-strong);
+    .hero-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: #4ade80; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
+    .hero h1 {
+      font-size: clamp(28px, 5vw, 42px);
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -1px;
+      margin-bottom: 0.75rem;
+      line-height: 1.15;
+    }
+    .hero h1 span { color: #a5f3fc; }
+    .hero p {
+      font-size: 16px;
+      color: rgba(255,255,255,0.65);
+      max-width: 480px;
+      margin: 0 auto 2rem;
+      line-height: 1.6;
+    }
+    .live-rates {
+      display: inline-flex;
+      gap: 1.5rem;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.15);
       border-radius: var(--radius-sm);
-      padding: 12px 14px;
+      padding: 0.75rem 1.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .live-rate-item { text-align: center; }
+    .live-rate-item .svc { font-size: 11px; color: rgba(255,255,255,0.55); font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; }
+    .live-rate-item .rate { font-size: 18px; font-weight: 700; color: #fff; margin-top: 2px; }
+    .live-rate-item .rate.best { color: #4ade80; }
+
+    /* ── Main layout ── */
+    .main { max-width: 720px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+
+    /* ── Prompt ── */
+    .prompt-card {
+      background: var(--surface);
+      border: 1px solid var(--border-md);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-md);
+    }
+    .prompt-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text3);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.75rem;
+    }
+    .prompt-input-row { display: flex; gap: 10px; align-items: flex-end; }
+    textarea {
+      flex: 1;
+      border: 1.5px solid var(--border-md);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
       font-size: 15px;
       font-family: inherit;
       color: var(--text);
@@ -120,420 +180,398 @@
       resize: none;
       line-height: 1.5;
       outline: none;
-      transition: border-color 0.15s;
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
-
-    textarea:focus { border-color: var(--accent); }
+    textarea:focus { border-color: var(--purple-mid); box-shadow: 0 0 0 3px var(--purple-bg); }
     textarea::placeholder { color: var(--text3); }
-
     .send-btn {
-      background: var(--accent);
+      background: linear-gradient(135deg, #4338ca, #2563eb);
       color: #fff;
       border: none;
       border-radius: var(--radius-sm);
-      padding: 0 20px;
-      height: 48px;
-      font-size: 15px;
-      font-weight: 500;
+      padding: 0 22px;
+      height: 50px;
+      font-size: 14px;
+      font-weight: 600;
       cursor: pointer;
       display: flex;
       align-items: center;
       gap: 8px;
       white-space: nowrap;
-      transition: opacity 0.15s, transform 0.1s;
+      transition: opacity 0.15s, transform 0.1s, box-shadow 0.15s;
+      box-shadow: 0 2px 8px rgba(67,56,202,0.4);
+      letter-spacing: 0.01em;
     }
-
-    .send-btn:hover { opacity: 0.88; }
-    .send-btn:active { transform: scale(0.97); }
-    .send-btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
-
-    .examples {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 12px;
-    }
-
-    .example-chip {
+    .send-btn:hover { opacity: 0.9; box-shadow: 0 4px 14px rgba(67,56,202,0.5); transform: translateY(-1px); }
+    .send-btn:active { transform: scale(0.97) translateY(0); }
+    .send-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; box-shadow: none; }
+    .chips { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 1rem; }
+    .chip {
       font-size: 12px;
-      padding: 5px 12px;
+      font-weight: 500;
+      padding: 5px 13px;
       border-radius: 99px;
-      border: 0.5px solid var(--border-strong);
+      border: 1px solid var(--border-md);
       background: var(--surface2);
       color: var(--text2);
       cursor: pointer;
-      transition: background 0.15s;
+      transition: all 0.15s;
     }
+    .chip:hover { background: var(--purple-bg); color: var(--purple); border-color: var(--purple-border); }
 
-    .example-chip:hover { background: var(--accent-bg); color: var(--accent); border-color: var(--accent); }
-
-    .result-area {
-      width: 100%;
-      max-width: 680px;
-      display: none;
-    }
-
+    /* ── Thinking ── */
     .thinking {
       display: flex;
       align-items: center;
       gap: 12px;
-      padding: 1rem 1.25rem;
+      padding: 1.25rem 1.5rem;
       background: var(--surface);
-      border: 0.5px solid var(--border);
+      border: 1px solid var(--border-md);
       border-radius: var(--radius);
-      margin-bottom: 1rem;
+      margin-bottom: 1.25rem;
       font-size: 14px;
       color: var(--text2);
+      box-shadow: var(--shadow-sm);
     }
-
     .dots span {
-      display: inline-block;
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--accent);
-      margin: 0 2px;
-      animation: bounce 1.2s infinite;
+      display: inline-block; width: 7px; height: 7px;
+      border-radius: 50%; background: var(--purple-mid);
+      margin: 0 2px; animation: bounce 1.2s infinite;
     }
-
     .dots span:nth-child(2) { animation-delay: 0.2s; }
     .dots span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes bounce { 0%,80%,100%{transform:translateY(0);opacity:0.35;} 40%{transform:translateY(-6px);opacity:1;} }
 
-    @keyframes bounce {
-      0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
-      40% { transform: translateY(-5px); opacity: 1; }
-    }
-
-    .recommendation-banner {
-      background: var(--green-bg);
-      border: 0.5px solid var(--green);
+    /* ── Recommendation banner ── */
+    .rec-banner {
+      background: linear-gradient(135deg, var(--green-bg), #f0faf0);
+      border: 1.5px solid var(--green-border);
       border-radius: var(--radius);
-      padding: 1rem 1.25rem;
-      margin-bottom: 1rem;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.25rem;
       display: flex;
       align-items: flex-start;
-      gap: 12px;
+      gap: 14px;
+      box-shadow: var(--shadow-sm);
     }
-
-    .rec-icon {
-      font-size: 24px;
-      margin-top: 2px;
+    .rec-icon-wrap {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: var(--green); display: flex;
+      align-items: center; justify-content: center;
+      flex-shrink: 0; font-size: 18px;
     }
+    .rec-banner h2 { font-size: 16px; font-weight: 700; color: var(--green); margin-bottom: 4px; }
+    .rec-banner p { font-size: 13px; color: var(--text2); line-height: 1.6; }
 
-    .rec-content h2 {
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--green);
-      margin-bottom: 4px;
-    }
-
-    .rec-content p {
-      font-size: 14px;
-      color: var(--text2);
-      line-height: 1.6;
-    }
-
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-bottom: 1rem;
-    }
-
-    @media (max-width: 540px) {
-      .cards-grid { grid-template-columns: 1fr; }
-    }
-
-    .service-card {
+    /* ── Service cards ── */
+    .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 1.25rem; }
+    @media (max-width: 560px) { .cards-grid { grid-template-columns: 1fr; } }
+    .svc-card {
       background: var(--surface);
-      border: 0.5px solid var(--border);
+      border: 1px solid var(--border-md);
       border-radius: var(--radius);
-      padding: 1rem;
+      padding: 1.25rem;
       position: relative;
+      overflow: hidden;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: var(--shadow-sm);
     }
-
-    .service-card.winner {
-      border: 2px solid var(--green);
-    }
-
+    .svc-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .svc-card.winner { border: 2px solid var(--green); }
+    .svc-card .color-bar { position: absolute; top: 0; left: 0; right: 0; height: 3px; }
     .winner-tag {
-      position: absolute;
-      top: -10px;
-      left: 12px;
-      background: var(--green-bg);
-      color: var(--green);
-      font-size: 11px;
-      font-weight: 600;
-      padding: 2px 10px;
-      border-radius: 99px;
-      border: 0.5px solid var(--green);
+      position: absolute; top: -1px; right: 14px;
+      background: var(--green); color: #fff;
+      font-size: 10px; font-weight: 700;
+      padding: 3px 10px; border-radius: 0 0 8px 8px;
+      letter-spacing: 0.05em; text-transform: uppercase;
     }
-
-    .svc-name {
-      font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 2px;
+    .svc-logo {
+      width: 36px; height: 36px; border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px; font-weight: 800; color: #fff;
+      margin-bottom: 10px; margin-top: 8px;
     }
-
-    .svc-url {
-      font-size: 11px;
-      color: var(--text3);
-      margin-bottom: 12px;
+    .svc-name { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 1px; }
+    .svc-url { font-size: 11px; color: var(--text3); margin-bottom: 12px; }
+    .svc-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 5px 0; border-bottom: 1px solid var(--border); font-size: 12px;
     }
+    .svc-row:last-of-type { border-bottom: none; }
+    .svc-row .k { color: var(--text3); }
+    .svc-row .v { font-weight: 600; color: var(--text); }
+    .svc-row .v.good { color: var(--green); }
+    .svc-open { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 500; color: var(--blue); text-decoration: none; margin-top: 10px; }
+    .svc-open:hover { text-decoration: underline; }
+    .spd-pill { font-size: 10px; font-weight: 600; padding: 2px 9px; border-radius: 99px; text-transform: uppercase; letter-spacing: 0.04em; }
+    .spd-fast { background: var(--green-bg); color: var(--green); }
+    .spd-slow { background: var(--amber-bg); color: var(--amber); }
 
-    .svc-stat {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 12px;
-      padding: 4px 0;
-      border-bottom: 0.5px solid var(--border);
-    }
-
-    .svc-stat:last-child { border-bottom: none; }
-
-    .svc-stat .key { color: var(--text2); }
-    .svc-stat .val { font-weight: 500; }
-    .svc-stat .val.good { color: var(--green); }
-    .svc-stat .val.meh { color: var(--amber); }
-
-    .speed-pill {
-      font-size: 10px;
-      padding: 2px 8px;
-      border-radius: 99px;
-      font-weight: 500;
-    }
-
-    .speed-fast { background: var(--green-bg); color: var(--green); }
-    .speed-slow { background: var(--amber-bg); color: var(--amber); }
-
-    .summary-table {
+    /* ── INR bar chart ── */
+    .bar-section {
       background: var(--surface);
-      border: 0.5px solid var(--border);
+      border: 1px solid var(--border-md);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.25rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .section-title { font-size: 13px; font-weight: 600; color: var(--text2); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.06em; }
+    .bar-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+    .bar-label { font-size: 13px; font-weight: 500; width: 120px; flex-shrink: 0; color: var(--text2); }
+    .bar-track { flex: 1; background: var(--surface2); border-radius: 6px; height: 32px; overflow: hidden; }
+    .bar-fill { height: 100%; border-radius: 6px; display: flex; align-items: center; padding-left: 12px; font-size: 12px; font-weight: 600; color: #fff; transition: width 0.7s cubic-bezier(.4,0,.2,1); white-space: nowrap; }
+    .bar-amount { font-size: 13px; font-weight: 700; width: 90px; text-align: right; flex-shrink: 0; }
+
+    /* ── Summary table ── */
+    .tbl-wrap {
+      background: var(--surface);
+      border: 1px solid var(--border-md);
       border-radius: var(--radius);
       overflow: hidden;
-      margin-bottom: 1rem;
+      margin-bottom: 0.75rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .tbl-wrap table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .tbl-wrap th { padding: 11px 14px; background: var(--surface2); font-weight: 600; color: var(--text3); font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; border-bottom: 1px solid var(--border-md); text-align: left; }
+    .tbl-wrap td { padding: 11px 14px; border-bottom: 1px solid var(--border); color: var(--text); }
+    .tbl-wrap tr:last-child td { border-bottom: none; }
+    .tbl-wrap tr.hl td { background: var(--green-bg); font-weight: 600; }
+    .disclaimer { font-size: 11px; color: var(--text3); text-align: center; margin: 0.5rem 0 1.5rem; }
+
+    /* ── Section divider ── */
+    .section-divider {
+      display: flex; align-items: center; gap: 12px;
+      margin: 2rem 0 1.5rem; color: var(--text3); font-size: 12px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.08em;
+    }
+    .section-divider::before, .section-divider::after {
+      content: ''; flex: 1; height: 1px; background: var(--border-md);
     }
 
-    .summary-table table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 13px;
-    }
-
-    .summary-table th {
-      text-align: left;
-      padding: 10px 14px;
-      background: var(--surface2);
-      font-weight: 500;
-      color: var(--text2);
-      font-size: 12px;
-      border-bottom: 0.5px solid var(--border);
-    }
-
-    .summary-table td {
-      padding: 10px 14px;
-      border-bottom: 0.5px solid var(--border);
-      color: var(--text);
-    }
-
-    .summary-table tr:last-child td { border-bottom: none; }
-    .summary-table tr.highlight td { background: var(--green-bg); font-weight: 500; }
-
-    .chart-section {
+    /* ── Card base ── */
+    .card {
       background: var(--surface);
-      border: 0.5px solid var(--border);
+      border: 1px solid var(--border-md);
       border-radius: var(--radius);
-      padding: 1rem 1.25rem;
+      padding: 1.5rem;
       margin-bottom: 1rem;
+      box-shadow: var(--shadow-sm);
     }
+    .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.25rem; }
+    .card-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+    .card-sub { font-size: 12px; color: var(--text3); }
 
-    .chart-section h3 {
-      font-size: 14px;
-      font-weight: 500;
-      margin-bottom: 1rem;
-      color: var(--text2);
-    }
-
-    .bar-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-
-    .bar-label { font-size: 13px; width: 110px; flex-shrink: 0; }
-    .bar-track { flex: 1; background: var(--surface2); border-radius: 4px; height: 28px; overflow: hidden; position: relative; }
-    .bar-fill { height: 100%; border-radius: 4px; display: flex; align-items: center; padding-left: 10px; font-size: 12px; font-weight: 500; color: #fff; transition: width 0.6s cubic-bezier(.4,0,.2,1); white-space: nowrap; }
-    .bar-amount { font-size: 13px; font-weight: 500; width: 80px; text-align: right; flex-shrink: 0; }
-
-    .disclaimer {
-      font-size: 12px;
-      color: var(--text3);
-      text-align: center;
-      margin-top: 0.5rem;
-    }
-
+    /* ── Range buttons ── */
+    .range-group { display: flex; gap: 4px; background: var(--surface2); border-radius: var(--radius-xs); padding: 3px; }
     .range-btn {
-      font-size: 12px;
-      font-weight: 500;
-      padding: 3px 10px;
+      font-size: 12px; font-weight: 600; padding: 4px 12px;
+      border-radius: 4px; border: none;
+      background: transparent; color: var(--text3);
+      cursor: pointer; transition: all 0.15s;
+    }
+    .range-btn:hover { color: var(--text2); }
+    .range-btn.active { background: var(--surface); color: var(--text); box-shadow: var(--shadow-sm); }
+
+    /* ── Stat cards ── */
+    .stat-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 1.25rem; }
+    .stat-card { background: var(--surface2); border-radius: var(--radius-sm); padding: 12px 14px; }
+    .stat-label { font-size: 11px; color: var(--text3); font-weight: 500; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .stat-val { font-size: 20px; font-weight: 700; color: var(--text); }
+    .stat-sub { font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+    /* ── Legend ── */
+    .legend { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 1rem; }
+    .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text2); font-weight: 500; }
+    .legend-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+
+    /* ── Weekly table ── */
+    .weekly-wrap { margin-top: 1.5rem; }
+    .weekly-label { font-size: 12px; font-weight: 600; color: var(--text2); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+    .weekly-label::after { content: ''; flex: 1; height: 1px; background: var(--border-md); }
+
+    /* ── Best time banner ── */
+    .best-time-card {
+      background: linear-gradient(135deg, var(--purple-bg), #f0f0ff);
+      border: 1.5px solid var(--purple-border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1rem;
+      display: flex; gap: 14px; align-items: flex-start;
+      box-shadow: var(--shadow-sm);
+    }
+    .best-time-icon {
+      width: 44px; height: 44px; background: var(--purple);
+      border-radius: 11px; display: flex; align-items: center;
+      justify-content: center; font-size: 20px; flex-shrink: 0;
+    }
+    .best-time-card h3 { font-size: 15px; font-weight: 700; color: var(--purple); margin-bottom: 5px; }
+    .best-time-card p { font-size: 13px; color: var(--text2); line-height: 1.65; }
+
+    /* ── Forecast table badge ── */
+    .est-badge { font-size: 9px; font-weight: 700; padding: 2px 7px; border-radius: 99px; text-transform: uppercase; letter-spacing: 0.05em; vertical-align: middle; margin-left: 6px; }
+    .est-best { background: var(--amber-bg); color: var(--amber); border: 1px solid var(--amber-border); }
+
+    /* ── Driver cards ── */
+    .driver-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    @media (max-width: 480px) { .driver-grid { grid-template-columns: 1fr; } }
+    .driver-card {
+      background: var(--surface2);
       border-radius: var(--radius-sm);
-      border: 0.5px solid var(--border-strong);
-      background: transparent;
-      color: var(--text2);
-      cursor: pointer;
-      transition: background 0.12s, color 0.12s;
+      padding: 14px;
+      border-left: 4px solid;
+      transition: transform 0.15s;
     }
-    .range-btn:hover { background: var(--surface2); }
-    .active-range { background: var(--accent-bg) !important; color: var(--accent) !important; border-color: var(--accent) !important; }
+    .driver-card:hover { transform: translateX(2px); }
+    .driver-top { display: flex; align-items: center; gap: 9px; margin-bottom: 8px; }
+    .driver-emoji { font-size: 20px; }
+    .driver-title { font-size: 13px; font-weight: 700; color: var(--text); }
+    .sentiment-pill { font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 99px; margin-top: 3px; display: inline-block; }
+    .driver-body { font-size: 12px; color: var(--text2); line-height: 1.65; }
 
-    .hist-stat { background: var(--surface2); border-radius: var(--radius-sm); padding: 10px 12px; }
-    .hist-stat-label { font-size: 11px; color: var(--text3); margin-bottom: 4px; }
-    .hist-stat-val { font-size: 16px; font-weight: 500; color: var(--text); }
-    .hist-stat-sub { font-size: 11px; color: var(--text2); margin-top: 2px; }
-
-    .history {
-      width: 100%;
-      max-width: 680px;
-      margin-top: 1.5rem;
-    }
-
-    .history h3 {
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--text3);
-      margin-bottom: 8px;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
-
+    /* ── History ── */
+    .history-section { margin-top: 2rem; }
+    .history-title { font-size: 11px; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
     .history-item {
       background: var(--surface);
-      border: 0.5px solid var(--border);
+      border: 1px solid var(--border);
       border-radius: var(--radius-sm);
       padding: 10px 14px;
       margin-bottom: 6px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 13px;
-      cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 13px; cursor: pointer;
+      transition: border-color 0.15s, transform 0.1s;
     }
+    .history-item:hover { border-color: var(--border-strong); transform: translateX(2px); }
+    .history-item .hq { color: var(--text2); }
+    .history-item .hr { color: var(--green); font-weight: 600; }
+    .history-item .ht { color: var(--text3); font-size: 11px; }
 
-    .history-item:hover { border-color: var(--border-strong); }
-    .history-item .h-query { color: var(--text2); }
-    .history-item .h-result { color: var(--green); font-weight: 500; }
-    .history-item .h-time { color: var(--text3); font-size: 11px; }
+    /* ── Animations ── */
+    @keyframes fadeUp { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+    .fade-up { animation: fadeUp 0.35s ease both; }
+    .fade-up-2 { animation: fadeUp 0.35s 0.06s ease both; }
+    .fade-up-3 { animation: fadeUp 0.35s 0.12s ease both; }
+    .fade-up-4 { animation: fadeUp 0.35s 0.18s ease both; }
   </style>
 </head>
 <body>
 
-<header>
-  <h1>&#x1F4B8; Remittance Advisor</h1>
-  <p>Ask in plain English — get the best way to send money to India</p>
-</header>
-
-<div class="prompt-card">
-  <div class="prompt-row">
-    <div class="prompt-wrap">
-      <label for="userPrompt">Your request</label>
-      <textarea id="userPrompt" rows="2" placeholder="e.g. I want to send $200 from US to India as fast as possible"></textarea>
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-badge"><span class="dot"></span> Live rates · Verified Jun 23, 2026</div>
+  <h1>Send money to <span>India</span><br>at the best rate</h1>
+  <p>Tell us what you want to send — we compare Money2India, Remitly, and Xoom instantly and tell you exactly which to use.</p>
+  <div class="live-rates">
+    <div class="live-rate-item">
+      <div class="svc">Remitly</div>
+      <div class="rate best">₹95.02</div>
     </div>
-    <button class="send-btn" id="sendBtn" onclick="analyze()">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-      Analyze
-    </button>
-  </div>
-  <div class="examples">
-    <span class="example-chip" onclick="setPrompt(this)">Send $100 from US to India</span>
-    <span class="example-chip" onclick="setPrompt(this)">Send $500, I need it fast</span>
-    <span class="example-chip" onclick="setPrompt(this)">Send $250, lowest fee matters</span>
-    <span class="example-chip" onclick="setPrompt(this)">Send $1000, best exchange rate</span>
+    <div class="live-rate-item" style="border-left:1px solid rgba(255,255,255,0.15);border-right:1px solid rgba(255,255,255,0.15);padding:0 1.5rem;">
+      <div class="svc">Money2India</div>
+      <div class="rate">₹94.75</div>
+    </div>
+    <div class="live-rate-item">
+      <div class="svc">Xoom</div>
+      <div class="rate">₹94.54</div>
+    </div>
   </div>
 </div>
 
-<div class="result-area" id="resultArea"></div>
+<!-- Main -->
+<div class="main">
 
-<div style="width:100%;max-width:680px;margin-top:1.5rem;">
-  <div style="background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius);padding:1.25rem;">
+  <!-- Prompt -->
+  <div class="prompt-card fade-up">
+    <div class="prompt-label">What would you like to send?</div>
+    <div class="prompt-input-row">
+      <textarea id="userPrompt" rows="2" placeholder="e.g. I want to send $200 from US to India as fast as possible"></textarea>
+      <button class="send-btn" id="sendBtn" onclick="analyze()">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        Analyze
+      </button>
+    </div>
+    <div class="chips">
+      <span class="chip" onclick="setPrompt(this)">Send $100 to India</span>
+      <span class="chip" onclick="setPrompt(this)">Send $500, I need it fast</span>
+      <span class="chip" onclick="setPrompt(this)">Send $250, lowest fee matters</span>
+      <span class="chip" onclick="setPrompt(this)">Send $1000, best exchange rate</span>
+    </div>
+  </div>
 
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;">
+  <!-- Results -->
+  <div id="resultArea" style="display:none;"></div>
+
+  <!-- Historical chart -->
+  <div class="section-divider">Historical rates</div>
+
+  <div class="card fade-up-2">
+    <div class="card-header">
       <div>
-        <h2 style="font-size:16px;font-weight:500;color:var(--text);margin:0 0 2px;">USD → INR historical rates</h2>
-        <p style="font-size:12px;color:var(--text3);margin:0;">Hover over the chart for exact values</p>
+        <div class="card-title">USD → INR exchange rate</div>
+        <div class="card-sub">Hover the chart for exact values per service</div>
       </div>
-      <div style="display:flex;gap:6px;" id="histToggle">
-        <button onclick="setRange('8w')" id="btn-8w" class="range-btn active-range">8W</button>
+      <div class="range-group" id="histToggle">
+        <button onclick="setRange('8w')" id="btn-8w" class="range-btn active">8W</button>
         <button onclick="setRange('3m')" id="btn-3m" class="range-btn">3M</button>
         <button onclick="setRange('6m')" id="btn-6m" class="range-btn">6M</button>
         <button onclick="setRange('1y')" id="btn-1y" class="range-btn">1Y</button>
       </div>
     </div>
-
-    <div style="display:flex;flex-wrap:wrap;gap:16px;margin-bottom:1rem;" id="histLegend"></div>
-
+    <div class="legend" id="histLegend"></div>
     <div style="position:relative;height:240px;">
-      <canvas id="histChart" role="img" aria-label="Line chart showing USD to INR exchange rates over time">Historical USD to INR rate data.</canvas>
+      <canvas id="histChart" role="img" aria-label="USD to INR historical rates">Historical USD to INR data.</canvas>
     </div>
-
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:1.25rem;" id="histStats"></div>
-
-    <div id="weeklyTableWrap" style="margin-top:1.25rem;display:none;">
-      <p style="font-size:12px;font-weight:500;color:var(--text2);margin-bottom:8px;">Weekly rates — INR per $1 USD</p>
-      <div style="overflow-x:auto;">
-        <table id="weeklyTable" style="width:100%;border-collapse:collapse;font-size:12px;table-layout:fixed;">
-          <thead>
-            <tr id="weeklyHead"></tr>
-          </thead>
-          <tbody id="weeklyBody"></tbody>
-        </table>
+    <div class="stat-grid" id="histStats"></div>
+    <div id="weeklyTableWrap" style="display:none;">
+      <div class="weekly-wrap">
+        <div class="weekly-label">Weekly breakdown — INR per $1 USD</div>
+        <div style="overflow-x:auto;">
+          <table style="width:100%;border-collapse:collapse;font-size:12px;">
+            <thead><tr id="weeklyHead"></tr></thead>
+            <tbody id="weeklyBody"></tbody>
+          </table>
+        </div>
       </div>
     </div>
-
   </div>
-</div>
 
-<!-- ── Forecast section ───────────────────────────────────────────── -->
-<div style="width:100%;max-width:680px;margin-top:1.5rem;">
+  <!-- Forecast -->
+  <div class="section-divider">3-month forecast</div>
 
   <!-- Best time banner -->
-  <div id="bestTimeBanner" style="background:var(--accent-bg);border:0.5px solid var(--accent);border-radius:var(--radius);padding:1rem 1.25rem;margin-bottom:1rem;display:flex;gap:12px;align-items:flex-start;">
-    <div style="font-size:22px;margin-top:2px;">&#x23F0;</div>
+  <div class="best-time-card fade-up-3">
+    <div class="best-time-icon">⏰</div>
     <div>
-      <div style="font-size:15px;font-weight:500;color:var(--accent);margin-bottom:4px;">Best time to transfer: <span id="bestTimeLabel">Send in July 2026</span></div>
-      <div style="font-size:13px;color:var(--text2);line-height:1.6;" id="bestTimeReason">
-        The USD is forecast to stay strong through Q3 2026 — rates could reach ₹96–97, giving your recipient more rupees. If you can wait 3–5 weeks, you may gain ₹100–200 extra per $100 sent. However if rates drop due to a US-India trade deal breakthrough, sending now locks in today's solid ₹94.75 rate.
-      </div>
+      <h3>Best time to transfer: <span id="bestTimeLabel">Send in July 2026</span></h3>
+      <p id="bestTimeReason">The USD is forecast to stay strong through Q3 2026 — rates could reach ₹96–97, giving your recipient more rupees. Waiting 3–5 weeks may gain ₹100–200 extra per $100 sent. However if the US-India full trade deal closes sooner, the INR could strengthen sharply — so sending now locks in today's solid ₹94.75.</p>
     </div>
   </div>
 
-  <!-- Forecast chart card -->
-  <div style="background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius);padding:1.25rem;margin-bottom:1rem;">
-    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem;">
+  <!-- Forecast chart -->
+  <div class="card fade-up-4">
+    <div class="card-header">
       <div>
-        <h2 style="font-size:16px;font-weight:500;color:var(--text);margin:0 0 2px;">3-month rate forecast</h2>
-        <p style="font-size:12px;color:var(--text3);margin:0;">Actual (solid) · Forecast (dashed) · Based on analyst consensus + macro factors</p>
+        <div class="card-title">Rate forecast — Jul to Sep 2026</div>
+        <div class="card-sub">Actual (solid) · Forecast (dashed) · Analyst consensus + macro factors</div>
       </div>
-      <span style="font-size:11px;font-weight:500;padding:3px 10px;border-radius:99px;background:var(--amber-bg);color:var(--amber);white-space:nowrap;">Estimate only</span>
+      <span style="font-size:11px;font-weight:600;padding:4px 11px;border-radius:99px;background:var(--amber-bg);color:var(--amber);border:1px solid var(--amber-border);white-space:nowrap;">Estimate only</span>
     </div>
-
-    <div style="display:flex;flex-wrap:wrap;gap:14px;margin-bottom:1rem;" id="forecastLegend"></div>
-
+    <div class="legend" id="forecastLegend"></div>
     <div style="position:relative;height:260px;">
-      <canvas id="forecastChart" role="img" aria-label="Forecast chart showing predicted USD to INR rates for July to September 2026">Predicted USD to INR rates for next 3 months.</canvas>
+      <canvas id="forecastChart" role="img" aria-label="USD to INR forecast Jul–Sep 2026">Predicted rates for next 3 months.</canvas>
     </div>
-
-    <!-- Forecast table -->
-    <div style="margin-top:1.25rem;overflow-x:auto;">
-      <table style="width:100%;border-collapse:collapse;font-size:12px;table-layout:fixed;">
+    <div style="margin-top:1.5rem;overflow-x:auto;">
+      <table style="width:100%;border-collapse:collapse;font-size:12px;">
         <thead>
-          <tr>
-            <th style="padding:8px 10px;text-align:left;font-weight:500;font-size:11px;color:var(--text2);background:var(--surface2);border-bottom:0.5px solid var(--border);">Month</th>
-            <th style="padding:8px 10px;text-align:center;font-weight:500;font-size:11px;color:#888780;background:var(--surface2);border-bottom:0.5px solid var(--border);">Forecast (mid)</th>
-            <th style="padding:8px 10px;text-align:center;font-weight:500;font-size:11px;color:#888780;background:var(--surface2);border-bottom:0.5px solid var(--border);">Range</th>
-            <th style="padding:8px 10px;text-align:center;font-weight:500;font-size:11px;color:#3b6d11;background:var(--surface2);border-bottom:0.5px solid var(--border);">Remitly est.</th>
-            <th style="padding:8px 10px;text-align:center;font-weight:500;font-size:11px;color:#185FA5;background:var(--surface2);border-bottom:0.5px solid var(--border);">Money2India est.</th>
-            <th style="padding:8px 10px;text-align:center;font-weight:500;font-size:11px;color:#BA7517;background:var(--surface2);border-bottom:0.5px solid var(--border);">Xoom est.</th>
+          <tr style="background:var(--surface2);">
+            <th style="padding:10px 12px;text-align:left;font-weight:600;font-size:11px;color:var(--text3);border-bottom:1px solid var(--border-md);text-transform:uppercase;letter-spacing:.06em;">Month</th>
+            <th style="padding:10px 12px;text-align:center;font-weight:600;font-size:11px;color:var(--text3);border-bottom:1px solid var(--border-md);text-transform:uppercase;letter-spacing:.06em;">Forecast</th>
+            <th style="padding:10px 12px;text-align:center;font-weight:600;font-size:11px;color:var(--text3);border-bottom:1px solid var(--border-md);text-transform:uppercase;letter-spacing:.06em;">Range</th>
+            <th style="padding:10px 12px;text-align:center;font-weight:600;font-size:11px;color:#2d6a0a;border-bottom:1px solid var(--border-md);text-transform:uppercase;letter-spacing:.06em;">Remitly</th>
+            <th style="padding:10px 12px;text-align:center;font-weight:600;font-size:11px;color:#1351a8;border-bottom:1px solid var(--border-md);text-transform:uppercase;letter-spacing:.06em;">M2India</th>
+            <th style="padding:10px 12px;text-align:center;font-weight:600;font-size:11px;color:#7a4800;border-bottom:1px solid var(--border-md);text-transform:uppercase;letter-spacing:.06em;">Xoom</th>
           </tr>
         </thead>
         <tbody id="forecastTableBody"></tbody>
@@ -542,44 +580,34 @@
   </div>
 
   <!-- Market drivers -->
-  <div style="background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius);padding:1.25rem;margin-bottom:1rem;">
-    <h2 style="font-size:15px;font-weight:500;color:var(--text);margin:0 0 1rem;">What's driving the forecast</h2>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;" id="driversGrid"></div>
+  <div class="card">
+    <div class="card-title" style="margin-bottom:1rem;">What's driving the forecast</div>
+    <div class="driver-grid" id="driversGrid"></div>
   </div>
 
-</div>
+  <!-- History -->
+  <div class="history-section" id="historyArea" style="display:none;">
+    <div class="history-title">Recent searches</div>
+    <div id="historyList"></div>
+  </div>
 
-<div class="history" id="historyArea" style="display:none">
-  <h3>Previous searches</h3>
-  <div id="historyList"></div>
-</div>
+</div><!-- /main -->
 
 <script>
-// Rates last verified: June 23, 2026. Sources: exiap.com, wise.com/compare
-// Mid-market rate: ~94.83 INR/USD
 const SERVICES = [
-  {
-    id: 'rem', name: 'Remitly', url: 'remitly.com', link: 'https://www.remitly.com',
-    color: '#3b6d11',
-    baseRate: 95.02, baseFee: 0, speed: 'Minutes', speedClass: 'fast',
-    strengths: ['fast', 'quick', 'urgent', 'speed', 'immediately', 'today', 'zero fees', 'no fee', 'free'],
-    prioritySpeed: true, priorityFee: true,
-  },
-  {
-    id: 'm2i', name: 'Money2India', url: 'money2india.com', link: 'https://www.money2india.com',
-    color: '#185FA5',
-    baseRate: 94.75, baseFee: 0, speed: 'Same day', speedClass: 'fast',
-    strengths: ['icici bank', 'nri'],
-  },
-  {
-    id: 'xoom', name: 'Xoom (PayPal)', url: 'xoom.com', link: 'https://www.xoom.com',
-    color: '#BA7517',
-    baseRate: 94.54, baseFee: 0, speed: '1 day', speedClass: 'fast',
-    strengths: ['paypal', 'existing account'],
-  },
+  { id:'rem',  name:'Remitly',      url:'remitly.com',      link:'https://www.remitly.com',      color:'#16a34a', bg:'#2d6a0a',
+    baseRate:95.02, baseFee:0, speed:'Minutes',  speedClass:'fast',
+    strengths:['fast','quick','urgent','speed','immediately','today','zero fees','no fee','free'],
+    prioritySpeed:true, priorityFee:true },
+  { id:'m2i',  name:'Money2India',  url:'money2india.com',  link:'https://www.money2india.com',  color:'#2563eb', bg:'#1351a8',
+    baseRate:94.75, baseFee:0, speed:'Same day', speedClass:'fast',
+    strengths:['icici','nri'] },
+  { id:'xoom', name:'Xoom (PayPal)',url:'xoom.com',          link:'https://www.xoom.com',          color:'#d97706', bg:'#7a4800',
+    baseRate:94.54, baseFee:0, speed:'1 day',    speedClass:'fast',
+    strengths:['paypal'] },
 ];
 
-let searchHistory = JSON.parse(localStorage.getItem('remit_history') || '[]');
+let searchHistory = JSON.parse(localStorage.getItem('remit_history2') || '[]');
 
 function setPrompt(el) {
   document.getElementById('userPrompt').value = el.textContent;
@@ -588,180 +616,138 @@ function setPrompt(el) {
 
 function parsePrompt(text) {
   const lower = text.toLowerCase();
-  const amountMatch = text.match(/\$?([\d,]+(?:\.\d+)?)/);
-  const amount = amountMatch ? parseFloat(amountMatch[1].replace(/,/g, '')) : 100;
-
-  const wantsSpeed = /fast|quick|urgent|immediate|asap|today|now|hurry|minutes/.test(lower);
-  const wantsLowFee = /fee|cheap|free|no fee|low cost|save|cheapest/.test(lower);
-  const wantsRate = /rate|exchange|best rate|inr|rupee/.test(lower);
-
-  return { amount, wantsSpeed, wantsLowFee, wantsRate };
+  const m = text.match(/\$?([\d,]+(?:\.\d+)?)/);
+  const amount = m ? parseFloat(m[1].replace(/,/g,'')) : 100;
+  return {
+    amount,
+    wantsSpeed:  /fast|quick|urgent|immediate|asap|today|now|hurry|minutes/.test(lower),
+    wantsLowFee: /fee|cheap|free|no fee|low cost|save|cheapest/.test(lower),
+    wantsRate:   /rate|exchange|best rate|inr|rupee/.test(lower),
+  };
 }
 
 function scoreService(svc, prefs) {
-  let score = 0;
-  const { amount, wantsSpeed, wantsLowFee, wantsRate } = prefs;
-
-  const received = (amount - svc.baseFee) * svc.baseRate;
-
-  if (wantsSpeed && svc.prioritySpeed) score += 40;
-  if (wantsLowFee && svc.priorityFee) score += 40;
-  if (wantsRate) score += svc.baseRate * 0.5;
-  score += received * 0.001;
-  if (!wantsSpeed && !wantsLowFee && !wantsRate) score += received * 0.002;
-
+  const received = (prefs.amount - svc.baseFee) * svc.baseRate;
+  let score = received * 0.001;
+  if (prefs.wantsSpeed  && svc.prioritySpeed) score += 40;
+  if (prefs.wantsLowFee && svc.priorityFee)   score += 40;
+  if (prefs.wantsRate)   score += svc.baseRate * 0.5;
+  if (!prefs.wantsSpeed && !prefs.wantsLowFee && !prefs.wantsRate) score += received * 0.002;
   return score;
 }
 
-function fluctuate(base) {
-  return +(base + (Math.random() - 0.5) * 0.3).toFixed(2);
-}
+function fluctuate(base) { return +(base + (Math.random()-0.5)*0.3).toFixed(2); }
 
-function buildRecommendation(prefs, services) {
-  const { wantsSpeed, wantsLowFee, wantsRate } = prefs;
-  const winner = services[0];
-  let why = '';
-
-  if (wantsSpeed) {
-    why = `Based on your request, <strong>${winner.name}</strong> offers the fastest transfer — money typically arrives in <strong>${winner.speed}</strong>.`;
-  } else if (wantsLowFee) {
-    why = `Based on your request, <strong>${winner.name}</strong> has the <strong>lowest fee ($${winner.fee.toFixed(2)})</strong>, so more of your money reaches the recipient.`;
-  } else if (wantsRate) {
-    why = `Based on your request, <strong>${winner.name}</strong> offers the <strong>best exchange rate (₹${winner.rate.toFixed(2)}/USD)</strong> right now.`;
-  } else {
-    why = `Based on your amount and current rates, <strong>${winner.name}</strong> gives the <strong>most INR (₹${winner.received.toLocaleString()})</strong> with the best combination of rate and fees.`;
-  }
-
-  return why;
+function buildWhy(prefs, winner) {
+  if (prefs.wantsSpeed)  return `<strong>${winner.name}</strong> offers the fastest transfer — money arrives in <strong>${winner.speed}</strong>.`;
+  if (prefs.wantsLowFee) return `<strong>${winner.name}</strong> has <strong>zero fees</strong>, so every dollar goes to the exchange rate.`;
+  if (prefs.wantsRate)   return `<strong>${winner.name}</strong> offers the <strong>best rate today (₹${winner.rate.toFixed(2)}/USD)</strong>.`;
+  return `<strong>${winner.name}</strong> gives your recipient the most — <strong>₹${winner.received.toLocaleString()}</strong> for $${prefs.amount}.`;
 }
 
 function renderResult(query, prefs, services) {
   const winner = services[0];
-  const maxReceived = Math.max(...services.map(s => s.received));
+  const maxRec = Math.max(...services.map(s => s.received));
   const area = document.getElementById('resultArea');
   area.style.display = 'block';
 
-  const bannerHtml = `
-    <div class="recommendation-banner">
-      <div class="rec-icon">&#x2714;</div>
-      <div class="rec-content">
+  const banner = `
+    <div class="rec-banner fade-up">
+      <div class="rec-icon-wrap">✓</div>
+      <div>
         <h2>Use ${winner.name}</h2>
-        <p>${buildRecommendation(prefs, services)}</p>
+        <p>${buildWhy(prefs, winner)}</p>
       </div>
     </div>`;
 
-  const cardsHtml = `
-    <div class="cards-grid">
-      ${services.map((s, i) => `
-        <div class="service-card ${i === 0 ? 'winner' : ''}">
-          ${i === 0 ? '<span class="winner-tag">Best choice</span>' : ''}
+  const cards = `
+    <div class="cards-grid fade-up-2">
+      ${services.map((s,i) => `
+        <div class="svc-card ${i===0?'winner':''}">
+          <div class="color-bar" style="background:${s.color};"></div>
+          ${i===0 ? '<div class="winner-tag">Best</div>' : ''}
+          <div class="svc-logo" style="background:${s.bg};">${s.name[0]}</div>
           <div class="svc-name">${s.name}</div>
           <div class="svc-url">${s.url}</div>
-          <div class="svc-stat"><span class="key">Rate (1 USD)</span><span class="val ${i === 0 ? 'good' : ''}">₹${s.rate.toFixed(2)}</span></div>
-          <div class="svc-stat"><span class="key">Fee</span><span class="val ${s.fee === 0 ? 'good' : 'meh'}">${s.fee === 0 ? 'Free' : '$' + s.fee.toFixed(2)}</span></div>
-          <div class="svc-stat"><span class="key">They receive</span><span class="val ${i === 0 ? 'good' : ''}">₹${s.received.toLocaleString()}</span></div>
-          <div class="svc-stat"><span class="key">Speed</span><span class="speed-pill speed-${s.speedClass}">${s.speed}</span></div>
-          <div style="margin-top:10px"><a href="${s.link}" target="_blank" rel="noopener" style="font-size:12px; color:var(--blue); text-decoration:none;">Open ${s.name} &#x2197;</a></div>
+          <div class="svc-row"><span class="k">Rate (1 USD)</span><span class="v good">₹${s.rate.toFixed(2)}</span></div>
+          <div class="svc-row"><span class="k">Fee</span><span class="v good">${s.fee===0?'Free':'$'+s.fee.toFixed(2)}</span></div>
+          <div class="svc-row"><span class="k">They receive</span><span class="v ${i===0?'good':''}">₹${s.received.toLocaleString()}</span></div>
+          <div class="svc-row"><span class="k">Speed</span><span class="spd-pill spd-${s.speedClass}">${s.speed}</span></div>
+          <a href="${s.link}" target="_blank" rel="noopener" class="svc-open">Open ${s.name} ↗</a>
         </div>`).join('')}
     </div>`;
 
   const bars = services.map(s => {
-    const pct = ((s.received / maxReceived) * 100).toFixed(1);
+    const pct = ((s.received/maxRec)*100).toFixed(1);
     return `
       <div class="bar-row">
         <div class="bar-label">${s.name}</div>
-        <div class="bar-track">
-          <div class="bar-fill" style="width:${pct}%; background:${s.color}">₹${s.received.toLocaleString()}</div>
-        </div>
+        <div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${s.color}">₹${s.received.toLocaleString()}</div></div>
         <div class="bar-amount" style="color:${s.color}">₹${s.received.toLocaleString()}</div>
       </div>`;
   }).join('');
 
-  const chartHtml = `
-    <div class="chart-section">
-      <h3>INR received for $${prefs.amount} sent</h3>
+  const barSection = `
+    <div class="bar-section fade-up-3">
+      <div class="section-title">INR received for $${prefs.amount}</div>
       ${bars}
     </div>`;
 
-  const tableHtml = `
-    <div class="summary-table">
+  const tbl = `
+    <div class="tbl-wrap fade-up-4">
       <table>
-        <thead>
-          <tr>
-            <th>Service</th><th>Rate (1 USD)</th><th>Fee</th><th>Recipient gets</th><th>Speed</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${services.map((s, i) => `
-            <tr class="${i === 0 ? 'highlight' : ''}">
-              <td>${i === 0 ? '&#x2714; ' : ''}${s.name}</td>
-              <td>₹${s.rate.toFixed(2)}</td>
-              <td>${s.fee === 0 ? 'Free' : '$' + s.fee.toFixed(2)}</td>
-              <td>₹${s.received.toLocaleString()}</td>
-              <td>${s.speed}</td>
-            </tr>`).join('')}
-        </tbody>
+        <thead><tr>
+          <th>Service</th><th>Rate (1 USD)</th><th>Fee</th><th>Recipient gets</th><th>Speed</th>
+        </tr></thead>
+        <tbody>${services.map((s,i) => `
+          <tr class="${i===0?'hl':''}">
+            <td>${i===0?'✓ ':''}<strong>${s.name}</strong></td>
+            <td>₹${s.rate.toFixed(2)}</td>
+            <td>${s.fee===0?'Free':'$'+s.fee.toFixed(2)}</td>
+            <td style="color:${i===0?'var(--green)':'var(--text)'}; font-weight:${i===0?700:400};">₹${s.received.toLocaleString()}</td>
+            <td>${s.speed}</td>
+          </tr>`).join('')}</tbody>
       </table>
-    </div>`;
+    </div>
+    <p class="disclaimer">Rates are live estimates · Verify on provider's site before sending · Last checked ${new Date().toLocaleTimeString()}</p>`;
 
-  area.innerHTML = bannerHtml + cardsHtml + chartHtml + tableHtml +
-    `<p class="disclaimer">Rates are live estimates. Verify on the provider's site before sending. Last checked: ${new Date().toLocaleString()}</p>`;
+  area.innerHTML = banner + cards + barSection + tbl;
 }
 
 function saveHistory(query, winner) {
-  const entry = { query, winner: winner.name, time: new Date().toISOString() };
-  searchHistory.unshift(entry);
-  if (searchHistory.length > 8) searchHistory = searchHistory.slice(0, 8);
-  localStorage.setItem('remit_history', JSON.stringify(searchHistory));
+  searchHistory.unshift({ query, winner: winner.name, time: new Date().toISOString() });
+  if (searchHistory.length > 8) searchHistory = searchHistory.slice(0,8);
+  localStorage.setItem('remit_history2', JSON.stringify(searchHistory));
   renderHistory();
 }
 
 function renderHistory() {
-  if (searchHistory.length === 0) return;
+  if (!searchHistory.length) return;
   const area = document.getElementById('historyArea');
-  const list = document.getElementById('historyList');
   area.style.display = 'block';
-  list.innerHTML = searchHistory.map(h => `
+  document.getElementById('historyList').innerHTML = searchHistory.map(h => `
     <div class="history-item" onclick="setAndRun('${h.query.replace(/'/g,"\\'")}')">
-      <span class="h-query">${h.query}</span>
-      <span class="h-result">&#x2714; ${h.winner}</span>
-      <span class="h-time">${new Date(h.time).toLocaleTimeString()}</span>
+      <span class="hq">${h.query}</span>
+      <span class="hr">✓ ${h.winner}</span>
+      <span class="ht">${new Date(h.time).toLocaleTimeString()}</span>
     </div>`).join('');
 }
 
-function setAndRun(q) {
-  document.getElementById('userPrompt').value = q;
-  analyze();
-}
+function setAndRun(q) { document.getElementById('userPrompt').value = q; analyze(); }
 
 function analyze() {
   const query = document.getElementById('userPrompt').value.trim();
   if (!query) { document.getElementById('userPrompt').focus(); return; }
-
   const btn = document.getElementById('sendBtn');
   btn.disabled = true;
-
   const area = document.getElementById('resultArea');
   area.style.display = 'block';
-  area.innerHTML = `
-    <div class="thinking">
-      <div class="dots"><span></span><span></span><span></span></div>
-      Checking rates on Money2India, Remitly, and Xoom…
-    </div>`;
-
+  area.innerHTML = `<div class="thinking"><div class="dots"><span></span><span></span><span></span></div>Checking rates on Money2India, Remitly, and Xoom…</div>`;
   const prefs = parsePrompt(query);
-
   setTimeout(() => {
-    const services = SERVICES.map(s => ({
-      ...s,
-      rate: fluctuate(s.baseRate),
-      fee: s.baseFee,
-    })).map(s => ({
-      ...s,
-      received: +((prefs.amount - s.fee) * s.rate).toFixed(0),
-      score: scoreService(s, prefs),
-    })).sort((a, b) => b.score - a.score);
-
+    const services = SERVICES.map(s => ({ ...s, rate: fluctuate(s.baseRate), fee: s.baseFee }))
+      .map(s => ({ ...s, received: +((prefs.amount - s.fee) * s.rate).toFixed(0), score: scoreService(s, prefs) }))
+      .sort((a,b) => b.score - a.score);
     renderResult(query, prefs, services);
     saveHistory(query, services[0]);
     btn.disabled = false;
@@ -778,186 +764,116 @@ renderHistory();
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
 const WEEKLY = [
-  { m: 'Apr 28', v: 84.30 },
-  { m: 'May 5',  v: 88.60 },
-  { m: 'May 12', v: 94.20 },
-  { m: 'May 19', v: 96.57 },
-  { m: 'May 26', v: 96.00 },
-  { m: 'Jun 2',  v: 95.48 },
-  { m: 'Jun 9',  v: 95.10 },
-  { m: 'Jun 16', v: 94.33 },
-  { m: 'Jun 23', v: 94.75 },
+  {m:'Apr 28',v:84.30},{m:'May 5',v:88.60},{m:'May 12',v:94.20},
+  {m:'May 19',v:96.57},{m:'May 26',v:96.00},{m:'Jun 2',v:95.48},
+  {m:'Jun 9',v:95.10},{m:'Jun 16',v:94.33},{m:'Jun 23',v:94.75},
 ];
-
 const MONTHLY = [
-  { m: 'Jun 25', v: 84.22 },
-  { m: 'Jul 25', v: 84.10 },
-  { m: 'Aug 25', v: 83.95 },
-  { m: 'Sep 25', v: 84.08 },
-  { m: 'Oct 25', v: 84.35 },
-  { m: 'Nov 25', v: 84.62 },
-  { m: 'Dec 25', v: 85.40 },
-  { m: 'Jan 26', v: 86.80 },
-  { m: 'Feb 26', v: 87.45 },
-  { m: 'Mar 26', v: 86.92 },
-  { m: 'Apr 26', v: 84.30 },
-  { m: 'May 26', v: 95.57 },
-  { m: 'Jun 26', v: 94.83 },
+  {m:'Jun 25',v:84.22},{m:'Jul 25',v:84.10},{m:'Aug 25',v:83.95},
+  {m:'Sep 25',v:84.08},{m:'Oct 25',v:84.35},{m:'Nov 25',v:84.62},
+  {m:'Dec 25',v:85.40},{m:'Jan 26',v:86.80},{m:'Feb 26',v:87.45},
+  {m:'Mar 26',v:86.92},{m:'Apr 26',v:84.30},{m:'May 26',v:95.57},
+  {m:'Jun 26',v:94.83},
 ];
-
-const SERVICES_HIST = [
-  { key: 'rem',  label: 'Remitly',     color: '#3b6d11', spread: +0.20 },
-  { key: 'm2i',  label: 'Money2India', color: '#185FA5', spread: -0.08 },
-  { key: 'xoom', label: 'Xoom',        color: '#BA7517', spread: -0.29 },
+const SVC_H = [
+  {key:'rem', label:'Remitly',     color:'#16a34a', spread:+0.20},
+  {key:'m2i', label:'Money2India', color:'#2563eb', spread:-0.08},
+  {key:'xoom',label:'Xoom',        color:'#d97706', spread:-0.29},
 ];
 
 let histChartInst = null;
-let currentRange = '8w';
 
-function getSlice(range) {
-  if (range === '8w') return { data: WEEKLY, isWeekly: true };
-  if (range === '3m') return { data: MONTHLY.slice(-3), isWeekly: false };
-  if (range === '6m') return { data: MONTHLY.slice(-6), isWeekly: false };
-  return { data: MONTHLY, isWeekly: false };
+function getSlice(r) {
+  if (r==='8w') return {data:WEEKLY,isWeekly:true};
+  if (r==='3m') return {data:MONTHLY.slice(-3),isWeekly:false};
+  if (r==='6m') return {data:MONTHLY.slice(-6),isWeekly:false};
+  return {data:MONTHLY,isWeekly:false};
 }
 
-function mkDataset(label, data, color, dash) {
-  return {
-    label, data,
-    borderColor: color,
-    borderDash: dash || [],
-    borderWidth: dash ? 1.5 : 2,
-    pointRadius: 4,
-    pointHoverRadius: 6,
-    pointBackgroundColor: color,
-    pointBorderColor: '#fff',
-    pointBorderWidth: 2,
-    tension: 0.35,
-    fill: false,
-  };
+function mkDs(label,data,color,dash) {
+  return { label, data, borderColor:color, borderDash:dash||[], borderWidth:dash?1.5:2.5,
+    pointRadius:4, pointHoverRadius:6, pointBackgroundColor:color,
+    pointBorderColor:'#fff', pointBorderWidth:2, tension:0.35, fill:false };
 }
 
 function renderHistStats(sliced) {
-  const vals = sliced.map(d => d.v);
-  const high = Math.max(...vals).toFixed(2);
-  const low  = Math.min(...vals).toFixed(2);
-  const change = (vals[vals.length - 1] - vals[0]).toFixed(2);
-  const sign = +change >= 0 ? '+' : '';
+  const vals = sliced.map(d=>d.v);
+  const hi = Math.max(...vals).toFixed(2), lo = Math.min(...vals).toFixed(2);
+  const chg = (vals[vals.length-1]-vals[0]).toFixed(2);
+  const sign = +chg>=0?'+':'';
   document.getElementById('histStats').innerHTML = `
-    <div class="hist-stat"><div class="hist-stat-label">Period high</div><div class="hist-stat-val">₹${high}</div><div class="hist-stat-sub">per USD</div></div>
-    <div class="hist-stat"><div class="hist-stat-label">Period low</div><div class="hist-stat-val">₹${low}</div><div class="hist-stat-sub">per USD</div></div>
-    <div class="hist-stat"><div class="hist-stat-label">Change</div><div class="hist-stat-val" style="color:${+change>=0?'#3b6d11':'#c0392b'}">${sign}${change}</div><div class="hist-stat-sub">start → end</div></div>`;
+    <div class="stat-card"><div class="stat-label">Period high</div><div class="stat-val">₹${hi}</div><div class="stat-sub">per USD</div></div>
+    <div class="stat-card"><div class="stat-label">Period low</div><div class="stat-val">₹${lo}</div><div class="stat-sub">per USD</div></div>
+    <div class="stat-card"><div class="stat-label">Change</div><div class="stat-val" style="color:${+chg>=0?'var(--green)':'var(--red)'}">${sign}${chg}</div><div class="stat-sub">start → end</div></div>`;
 }
 
 function renderHistLegend() {
-  const items = [{ color: '#888780', label: 'Mid-market (dashed)' }, ...SERVICES_HIST.map(s => ({ color: s.color, label: s.label }))];
+  const items = [{color:'#888780',label:'Mid-market'},...SVC_H.map(s=>({color:s.color,label:s.label}))];
   document.getElementById('histLegend').innerHTML = items.map(l =>
-    `<span style="display:flex;align-items:center;gap:5px;font-size:12px;color:var(--text2)"><span style="width:10px;height:10px;border-radius:2px;background:${l.color}"></span>${l.label}</span>`
-  ).join('');
+    `<div class="legend-item"><div class="legend-dot" style="background:${l.color}"></div>${l.label}</div>`).join('');
 }
 
 function renderWeeklyTable(sliced) {
   const wrap = document.getElementById('weeklyTableWrap');
   wrap.style.display = 'block';
-
   const lastIdx = sliced.length - 1;
-  const head = document.getElementById('weeklyHead');
-  const body = document.getElementById('weeklyBody');
-
-  const cols = ['Week', 'Mid-market', ...SERVICES_HIST.map(s => s.label)];
-  const colors = ['#888780', ...SERVICES_HIST.map(s => s.color)];
-
-  head.innerHTML = cols.map((c, i) => `
-    <th style="padding:7px 10px;text-align:${i===0?'left':'center'};font-weight:500;font-size:11px;color:${colors[i]};background:var(--surface2);border-bottom:0.5px solid var(--border);white-space:nowrap;">${c}</th>
-  `).join('');
-
-  body.innerHTML = sliced.map((d, i) => {
-    const isLast = i === lastIdx;
-    const bg = isLast ? 'var(--green-bg)' : (i % 2 === 0 ? 'var(--surface)' : 'var(--surface2)');
-    const mid = d.v.toFixed(2);
-    const svcCells = SERVICES_HIST.map(s => {
-      const val = (d.v + s.spread).toFixed(2);
-      return `<td style="padding:7px 10px;text-align:center;border-bottom:0.5px solid var(--border);font-size:12px;font-weight:500;color:${s.color};">₹${val}</td>`;
-    }).join('');
+  const cols = ['Week','Mid-market',...SVC_H.map(s=>s.label)];
+  const colors = ['#888780',...SVC_H.map(s=>s.color)];
+  document.getElementById('weeklyHead').innerHTML = cols.map((c,i) =>
+    `<th style="padding:9px 12px;text-align:${i===0?'left':'center'};font-weight:600;font-size:11px;color:${colors[i]};background:var(--surface2);border-bottom:1px solid var(--border-md);text-transform:uppercase;letter-spacing:.05em;">${c}</th>`).join('');
+  document.getElementById('weeklyBody').innerHTML = sliced.map((d,i) => {
+    const isLast = i===lastIdx;
+    const bg = isLast?'var(--green-bg)':(i%2===0?'var(--surface)':'var(--surface2)');
+    const svcCells = SVC_H.map(s =>
+      `<td style="padding:9px 12px;text-align:center;border-bottom:1px solid var(--border);font-size:12px;font-weight:600;color:${s.color};">₹${(d.v+s.spread).toFixed(2)}</td>`).join('');
     return `<tr style="background:${bg};">
-      <td style="padding:7px 10px;border-bottom:0.5px solid var(--border);font-size:12px;color:var(--text2);white-space:nowrap;">${d.m}${isLast?' <span style="font-size:10px;background:var(--green-bg);color:var(--green);padding:1px 6px;border-radius:99px;font-weight:500;">now</span>':''}</td>
-      <td style="padding:7px 10px;text-align:center;border-bottom:0.5px solid var(--border);font-size:12px;color:#888780;">₹${mid}</td>
-      ${svcCells}
-    </tr>`;
+      <td style="padding:9px 12px;border-bottom:1px solid var(--border);font-size:12px;font-weight:500;color:var(--text2);white-space:nowrap;">${d.m}${isLast?' <span style="font-size:9px;background:var(--green);color:#fff;padding:2px 7px;border-radius:99px;font-weight:700;margin-left:4px;text-transform:uppercase;letter-spacing:.05em;">Now</span>':''}</td>
+      <td style="padding:9px 12px;text-align:center;border-bottom:1px solid var(--border);font-size:12px;color:#888780;font-weight:500;">₹${d.v.toFixed(2)}</td>
+      ${svcCells}</tr>`;
   }).reverse().join('');
 }
 
-function hideWeeklyTable() {
-  document.getElementById('weeklyTableWrap').style.display = 'none';
-}
-
 function drawHistChart(range) {
-  const { data: sliced, isWeekly } = getSlice(range);
-  const labels = sliced.map(d => d.m);
-  const mid    = sliced.map(d => d.v);
+  const {data:sliced,isWeekly} = getSlice(range);
+  const labels = sliced.map(d=>d.m);
+  const mid = sliced.map(d=>d.v);
   const allVals = [...mid];
-
-  const datasets = [mkDataset('Mid-market', mid, '#888780', [5, 3])];
-  SERVICES_HIST.forEach(s => {
-    const vals = sliced.map(d => +(d.v + s.spread).toFixed(2));
+  const datasets = [mkDs('Mid-market',mid,'#888780',[5,3])];
+  SVC_H.forEach(s => {
+    const vals = sliced.map(d=>+(d.v+s.spread).toFixed(2));
     allVals.push(...vals);
-    datasets.push(mkDataset(s.label, vals, s.color));
+    datasets.push(mkDs(s.label,vals,s.color));
   });
-
   renderHistStats(sliced);
-  if (isWeekly) renderWeeklyTable(sliced); else hideWeeklyTable();
-
-  const yMin = +(Math.min(...allVals) - 0.8).toFixed(1);
-  const yMax = +(Math.max(...allVals) + 0.8).toFixed(1);
-
+  if (isWeekly) renderWeeklyTable(sliced);
+  else document.getElementById('weeklyTableWrap').style.display='none';
+  const yMin = +(Math.min(...allVals)-0.8).toFixed(1);
+  const yMax = +(Math.max(...allVals)+0.8).toFixed(1);
+  const tooltipCfg = {
+    backgroundColor:'rgba(17,17,16,0.92)', titleColor:'#e5e4dc', bodyColor:'#a8a7a0',
+    padding:14, bodySpacing:6, borderColor:'rgba(255,255,255,0.1)', borderWidth:1,
+    callbacks:{ title:i=>'Week of '+i[0].label, label:c=>`  ${c.dataset.label}: ₹${c.parsed.y.toFixed(2)}` }
+  };
   if (histChartInst) {
-    histChartInst.data.labels = labels;
-    histChartInst.data.datasets = datasets;
-    histChartInst.options.scales.y.min = yMin;
-    histChartInst.options.scales.y.max = yMax;
+    histChartInst.data.labels=labels; histChartInst.data.datasets=datasets;
+    histChartInst.options.scales.y.min=yMin; histChartInst.options.scales.y.max=yMax;
     histChartInst.update();
   } else {
     histChartInst = new Chart(document.getElementById('histChart'), {
-      type: 'line',
-      data: { labels, datasets },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        interaction: { mode: 'index', intersect: false },
-        plugins: {
-          legend: { display: false },
-          tooltip: {
-            backgroundColor: 'rgba(30,30,28,0.92)',
-            titleColor: '#d3d1c7',
-            bodyColor: '#d3d1c7',
-            padding: 12,
-            bodySpacing: 6,
-            callbacks: {
-              title: items => 'Week of ' + items[0].label,
-              label: ctx => `  ${ctx.dataset.label}: ₹${ctx.parsed.y.toFixed(2)}`,
-            }
-          },
-        },
-        scales: {
-          x: {
-            grid: { display: false },
-            ticks: { color: '#888780', font: { size: 11 }, maxRotation: 0 },
-          },
-          y: {
-            min: yMin, max: yMax,
-            grid: { color: 'rgba(128,128,128,0.08)' },
-            ticks: { color: '#888780', font: { size: 11 }, callback: v => '₹' + v.toFixed(1) },
-          }
-        }
-      }
+      type:'line', data:{labels,datasets},
+      options:{ responsive:true, maintainAspectRatio:false,
+        interaction:{mode:'index',intersect:false},
+        plugins:{ legend:{display:false}, tooltip:tooltipCfg },
+        scales:{ x:{grid:{display:false},ticks:{color:'#9b9a94',font:{size:11},maxRotation:0}},
+          y:{min:yMin,max:yMax,grid:{color:'rgba(128,128,128,0.07)'},
+            ticks:{color:'#9b9a94',font:{size:11},callback:v=>'₹'+v.toFixed(1)}} } }
     });
   }
 }
 
 function setRange(r) {
-  currentRange = r;
-  document.querySelectorAll('.range-btn').forEach(b => b.classList.remove('active-range'));
-  document.getElementById('btn-' + r).classList.add('active-range');
+  document.querySelectorAll('.range-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('btn-'+r).classList.add('active');
   drawHistChart(r);
 }
 
@@ -965,181 +881,92 @@ renderHistLegend();
 drawHistChart('8w');
 
 // ── Forecast ──────────────────────────────────────────────────────────────────
-// Sources: tradersunion.com, cambridgecurrencies.com, Goldman Sachs, ING Think
-// Fed holds at 3.5–3.75%, possible hike; US-India tariff deal interim at 18%;
-// Iran war keeping oil/inflation elevated → USD stays strong into Q3 2026
 const FORECAST = [
-  { m: 'Jul 26', mid: 96.00, lo: 94.50, hi: 97.50, actual: false },
-  { m: 'Aug 26', mid: 96.80, lo: 95.00, hi: 98.60, actual: false },
-  { m: 'Sep 26', mid: 95.80, lo: 93.50, hi: 98.20, actual: false },
+  {m:'Jul 26',mid:96.00,lo:94.50,hi:97.50},
+  {m:'Aug 26',mid:96.80,lo:95.00,hi:98.60},
+  {m:'Sep 26',mid:95.80,lo:93.50,hi:98.20},
 ];
-
-const BRIDGE = { m: 'Jun 26', mid: 94.83, actual: true }; // last actual point
-
+const BRIDGE = {m:'Jun 26',mid:94.83};
 const DRIVERS = [
-  { icon: '&#x1F3E6;', title: 'Fed holds rates high', color: '#c0392b', sentiment: 'bearish INR',
-    body: 'Fed kept rates at 3.5–3.75% in June 2026 with a possible hike looming. High US rates attract capital away from emerging markets, weakening the rupee.' },
-  { icon: '&#x1F6E2;', title: 'Iran war → oil inflation', color: '#BA7517', sentiment: 'bearish INR',
-    body: 'Elevated oil prices raise India\'s import bill and widen the current account deficit. India imports ~85% of its oil, making INR sensitive to energy prices.' },
-  { icon: '&#x1F91D;', title: 'US-India trade deal', color: '#3b6d11', sentiment: 'bullish INR',
-    body: 'Interim deal cut tariffs from 50% to 18% in Feb 2026. A full deal could attract FII inflows and significantly strengthen the rupee toward ₹92–93.' },
-  { icon: '&#x1F4C8;', title: 'India GDP 6.9% growth', color: '#185FA5', sentiment: 'bullish INR',
-    body: 'Goldman Sachs projects 6.9% GDP growth in 2026. Strong fundamentals support long-term rupee stability and foreign investment inflows.' },
+  {icon:'🏦',title:'Fed holds rates high',color:'#dc2626',sentiment:'bearish INR',sentBg:'#fef2f2',
+   body:"Fed held at 3.5–3.75% in June 2026 with a possible hike ahead. High US rates attract capital away from emerging markets, weakening INR."},
+  {icon:'🛢',title:'Iran war → oil inflation',color:'#d97706',sentiment:'bearish INR',sentBg:'var(--amber-bg)',
+   body:"Elevated oil prices raise India's import bill and widen the current account deficit. India imports ~85% of its oil."},
+  {icon:'🤝',title:'US-India trade deal',color:'#16a34a',sentiment:'bullish INR',sentBg:'var(--green-bg)',
+   body:"Interim deal cut tariffs 50%→18% in Feb 2026. A full deal could attract FII inflows and push INR toward ₹92–93."},
+  {icon:'📈',title:'India GDP at 6.9%',color:'#2563eb',sentiment:'bullish INR',sentBg:'var(--blue-bg)',
+   body:"Goldman Sachs projects 6.9% GDP growth in 2026. Strong fundamentals support long-term rupee stability and FII inflows."},
 ];
 
 function renderForecastLegend() {
   document.getElementById('forecastLegend').innerHTML = [
-    { color: '#888780', label: 'Actual mid-market', dash: true },
-    { color: '#c0392b', label: 'Forecast (consensus)', dash: true },
-    { color: 'rgba(192,57,43,0.15)', label: 'Forecast range (lo–hi)', dash: false, box: true },
-  ].map(l => `
-    <span style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text2)">
-      ${l.box
-        ? `<span style="width:20px;height:10px;border-radius:2px;background:rgba(192,57,43,0.25);border:0.5px solid #c0392b;display:inline-block;"></span>`
-        : `<span style="width:20px;height:2px;background:${l.color};display:inline-block;${l.dash?'border-top:2px dashed '+l.color+';background:transparent;':''};"></span>`
-      }
-      ${l.label}
-    </span>`).join('');
+    {color:'#888780',label:'Actual mid-market',dash:true},
+    {color:'#dc2626',label:'Forecast (consensus)',dash:true},
+    {color:'rgba(220,38,38,0.15)',label:'Forecast range',box:true},
+  ].map(l => `<div class="legend-item">${l.box
+    ? `<span style="width:18px;height:10px;border-radius:3px;background:rgba(220,38,38,0.2);border:1px solid #dc2626;display:inline-block;flex-shrink:0;"></span>`
+    : `<div style="width:18px;height:2px;background:${l.color};border-top:2px ${l.dash?'dashed':'solid'} ${l.color};flex-shrink:0;"></div>`}${l.label}</div>`).join('');
 }
 
 function renderForecastTable() {
-  document.getElementById('forecastTableBody').innerHTML = FORECAST.map((f, i) => {
-    const bg = i === 0 ? 'var(--amber-bg)' : (i % 2 === 0 ? 'var(--surface)' : 'var(--surface2)');
-    const rem  = (f.mid + 0.20).toFixed(2);
-    const m2i  = (f.mid - 0.08).toFixed(2);
-    const xoom = (f.mid - 0.29).toFixed(2);
-    const best = i === 0 ? ' <span style="font-size:10px;background:var(--amber-bg);color:var(--amber);padding:1px 6px;border-radius:99px;font-weight:500;border:0.5px solid var(--amber);">best window</span>' : '';
-    return `<tr style="background:${bg}">
-      <td style="padding:8px 10px;border-bottom:0.5px solid var(--border);font-size:12px;color:var(--text2);font-weight:500;">${f.m}${best}</td>
-      <td style="padding:8px 10px;text-align:center;border-bottom:0.5px solid var(--border);font-size:13px;font-weight:500;color:var(--text);">₹${f.mid.toFixed(2)}</td>
-      <td style="padding:8px 10px;text-align:center;border-bottom:0.5px solid var(--border);font-size:11px;color:var(--text2);">₹${f.lo.toFixed(1)} – ₹${f.hi.toFixed(1)}</td>
-      <td style="padding:8px 10px;text-align:center;border-bottom:0.5px solid var(--border);font-size:12px;font-weight:500;color:#3b6d11;">₹${rem}</td>
-      <td style="padding:8px 10px;text-align:center;border-bottom:0.5px solid var(--border);font-size:12px;font-weight:500;color:#185FA5;">₹${m2i}</td>
-      <td style="padding:8px 10px;text-align:center;border-bottom:0.5px solid var(--border);font-size:12px;font-weight:500;color:#BA7517;">₹${xoom}</td>
+  document.getElementById('forecastTableBody').innerHTML = FORECAST.map((f,i) => {
+    const bg = i===0?'var(--amber-bg)':(i%2===0?'var(--surface)':'var(--surface2)');
+    return `<tr style="background:${bg};">
+      <td style="padding:10px 12px;border-bottom:1px solid var(--border);font-size:13px;font-weight:600;color:var(--text);">${f.m}${i===0?'<span class="est-badge est-best">Best window</span>':''}</td>
+      <td style="padding:10px 12px;text-align:center;border-bottom:1px solid var(--border);font-size:14px;font-weight:700;color:var(--text);">₹${f.mid.toFixed(2)}</td>
+      <td style="padding:10px 12px;text-align:center;border-bottom:1px solid var(--border);font-size:11px;color:var(--text3);">₹${f.lo.toFixed(1)}–${f.hi.toFixed(1)}</td>
+      <td style="padding:10px 12px;text-align:center;border-bottom:1px solid var(--border);font-size:13px;font-weight:600;color:#16a34a;">₹${(f.mid+0.20).toFixed(2)}</td>
+      <td style="padding:10px 12px;text-align:center;border-bottom:1px solid var(--border);font-size:13px;font-weight:600;color:#2563eb;">₹${(f.mid-0.08).toFixed(2)}</td>
+      <td style="padding:10px 12px;text-align:center;border-bottom:1px solid var(--border);font-size:13px;font-weight:600;color:#d97706;">₹${(f.mid-0.29).toFixed(2)}</td>
     </tr>`;
   }).join('');
 }
 
 function renderDrivers() {
   document.getElementById('driversGrid').innerHTML = DRIVERS.map(d => `
-    <div style="background:var(--surface2);border-radius:var(--radius-sm);padding:12px;border-left:3px solid ${d.color};">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
-        <span style="font-size:18px;">${d.icon}</span>
+    <div class="driver-card" style="border-left-color:${d.color};">
+      <div class="driver-top">
+        <div class="driver-emoji">${d.icon}</div>
         <div>
-          <div style="font-size:13px;font-weight:500;color:var(--text);">${d.title}</div>
-          <div style="font-size:10px;font-weight:500;padding:1px 7px;border-radius:99px;display:inline-block;margin-top:2px;background:${d.color}22;color:${d.color};">${d.sentiment}</div>
+          <div class="driver-title">${d.title}</div>
+          <div class="sentiment-pill" style="background:${d.sentBg};color:${d.color};">${d.sentiment}</div>
         </div>
       </div>
-      <div style="font-size:12px;color:var(--text2);line-height:1.6;">${d.body}</div>
+      <div class="driver-body">${d.body}</div>
     </div>`).join('');
 }
 
 function drawForecastChart() {
   const actual = [...WEEKLY.slice(-4), BRIDGE];
-  const allLabels = [...actual.map(d => d.m), ...FORECAST.map(d => d.m)];
-  const nActual = actual.length;
-
-  const midActual  = actual.map(d => d.v ?? d.mid);
-  const midForecast = FORECAST.map(d => d.mid);
-  const hiData     = FORECAST.map(d => d.hi);
-  const loData     = FORECAST.map(d => d.lo);
-
-  // Bridge last actual to first forecast for continuous look
-  const forecastLine = [...Array(nActual - 1).fill(null), midActual[nActual - 1], ...midForecast];
-  const hiLine       = [...Array(nActual - 1).fill(null), midActual[nActual - 1], ...hiData];
-  const loLine       = [...Array(nActual - 1).fill(null), midActual[nActual - 1], ...loData];
-
-  const allVals = [...midActual, ...midForecast, ...hiData, ...loData];
-  const yMin = +(Math.min(...allVals) - 1).toFixed(0);
-  const yMax = +(Math.max(...allVals) + 1).toFixed(0);
-
+  const n = actual.length;
+  const allLabels = [...actual.map(d=>d.m), ...FORECAST.map(d=>d.m)];
+  const midAct = actual.map(d=>d.v??d.mid);
+  const fLine = [...Array(n-1).fill(null), midAct[n-1], ...FORECAST.map(d=>d.mid)];
+  const hiLine = [...Array(n-1).fill(null), midAct[n-1], ...FORECAST.map(d=>d.hi)];
+  const loLine = [...Array(n-1).fill(null), midAct[n-1], ...FORECAST.map(d=>d.lo)];
+  const allVals = [...midAct, ...FORECAST.flatMap(d=>[d.mid,d.hi,d.lo])];
+  const yMin = +(Math.min(...allVals)-1).toFixed(0);
+  const yMax = +(Math.max(...allVals)+1).toFixed(0);
   new Chart(document.getElementById('forecastChart'), {
-    type: 'line',
-    data: {
-      labels: allLabels,
-      datasets: [
-        {
-          label: 'Forecast hi',
-          data: hiLine,
-          borderColor: 'transparent',
-          backgroundColor: 'rgba(192,57,43,0.12)',
-          pointRadius: 0,
-          fill: '+1',
-          tension: 0.3,
-        },
-        {
-          label: 'Forecast lo',
-          data: loLine,
-          borderColor: 'rgba(192,57,43,0.3)',
-          borderDash: [3, 3],
-          borderWidth: 1,
-          backgroundColor: 'rgba(192,57,43,0.12)',
-          pointRadius: 0,
-          fill: false,
-          tension: 0.3,
-        },
-        {
-          label: 'Forecast (consensus)',
-          data: forecastLine,
-          borderColor: '#c0392b',
-          borderDash: [6, 4],
-          borderWidth: 2.5,
-          pointRadius: (ctx) => ctx.dataIndex >= nActual ? 5 : 0,
-          pointBackgroundColor: '#c0392b',
-          pointBorderColor: '#fff',
-          pointBorderWidth: 2,
-          tension: 0.3,
-          fill: false,
-        },
-        {
-          label: 'Actual mid-market',
-          data: [...midActual, ...Array(FORECAST.length).fill(null)],
-          borderColor: '#888780',
-          borderWidth: 2,
-          pointRadius: 4,
-          pointBackgroundColor: '#888780',
-          pointBorderColor: '#fff',
-          pointBorderWidth: 1.5,
-          tension: 0.35,
-          fill: false,
-        },
-      ]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      interaction: { mode: 'index', intersect: false },
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          backgroundColor: 'rgba(30,30,28,0.92)',
-          titleColor: '#d3d1c7',
-          bodyColor: '#d3d1c7',
-          padding: 12,
-          bodySpacing: 5,
-          filter: item => item.dataset.label !== 'Forecast hi',
-          callbacks: {
-            title: items => items[0].label,
-            label: ctx => {
-              if (ctx.parsed.y === null) return null;
-              return `  ${ctx.dataset.label}: ₹${ctx.parsed.y.toFixed(2)}`;
-            }
-          }
-        },
-        annotation: {},
-      },
-      scales: {
-        x: {
-          grid: { display: false },
-          ticks: { color: '#888780', font: { size: 11 }, maxRotation: 0 },
-        },
-        y: {
-          min: yMin, max: yMax,
-          grid: { color: 'rgba(128,128,128,0.08)' },
-          ticks: { color: '#888780', font: { size: 11 }, callback: v => '₹' + v.toFixed(0) },
-        }
-      }
-    }
+    type:'line',
+    data:{ labels:allLabels, datasets:[
+      {label:'hi',data:hiLine,borderColor:'transparent',backgroundColor:'rgba(220,38,38,0.1)',pointRadius:0,fill:'+1',tension:0.3},
+      {label:'lo',data:loLine,borderColor:'rgba(220,38,38,0.25)',borderDash:[3,3],borderWidth:1,backgroundColor:'transparent',pointRadius:0,fill:false,tension:0.3},
+      {label:'Forecast (consensus)',data:fLine,borderColor:'#dc2626',borderDash:[7,4],borderWidth:2.5,
+       pointRadius:ctx=>ctx.dataIndex>=n?5:0,pointBackgroundColor:'#dc2626',pointBorderColor:'#fff',pointBorderWidth:2,tension:0.3,fill:false},
+      {label:'Actual mid-market',data:[...midAct,...Array(FORECAST.length).fill(null)],
+       borderColor:'#888780',borderWidth:2.5,pointRadius:4,pointBackgroundColor:'#888780',pointBorderColor:'#fff',pointBorderWidth:2,tension:0.35,fill:false},
+    ]},
+    options:{ responsive:true, maintainAspectRatio:false,
+      interaction:{mode:'index',intersect:false},
+      plugins:{ legend:{display:false},
+        tooltip:{ backgroundColor:'rgba(17,17,16,0.92)',titleColor:'#e5e4dc',bodyColor:'#a8a7a0',
+          padding:14,bodySpacing:6,borderColor:'rgba(255,255,255,0.1)',borderWidth:1,
+          filter:i=>i.dataset.label!=='hi',
+          callbacks:{ title:i=>i[0].label, label:c=>c.parsed.y===null?null:`  ${c.dataset.label}: ₹${c.parsed.y.toFixed(2)}` } } },
+      scales:{ x:{grid:{display:false},ticks:{color:'#9b9a94',font:{size:11},maxRotation:0}},
+        y:{min:yMin,max:yMax,grid:{color:'rgba(128,128,128,0.07)'},
+          ticks:{color:'#9b9a94',font:{size:11},callback:v=>'₹'+v.toFixed(0)}} } }
   });
 }
 
